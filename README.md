@@ -61,6 +61,12 @@ begin
 
 ## Exemplos:
 
+### Exemplo compilado
+
+* FMX
+* VCL Server
+* VCL Client
+  
 ### Exemplo FMX
 ```
 ..\Base64Bitmap\FMX\
