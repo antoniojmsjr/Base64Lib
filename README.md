@@ -59,7 +59,7 @@ begin
   end;
 ```
 
-## Exemplo:
+## Exemplos:
 
 ### Exemplo FMX
 ```
