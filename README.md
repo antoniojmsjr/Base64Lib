@@ -25,7 +25,7 @@ Para codificar e decodificar uma imagem(Bitmap) em Base64, utilizar a classe **T
 ..\Base64Bitmap\Utils\Utils.Image.pas
 ```
 
-## Uso:
+## Uso da biblioteca:
 
 ```delphi
 uses Utils.Image.pas;
@@ -33,5 +33,28 @@ uses Utils.Image.pas;
 ### Base64 para Imagem:
 
 ```delphi
+var
+  lBase64: string;
+begin
+  // ENCODE BITMAP
+  lBase64 := TImageUtils.BitmapToBase64(TImage.Picture.Bitmap);
+```
 
+### Imagem para Base64:
+
+```delphi
+var
+  lBase64: string;
+  lBitmap: TBitmap;
+begin
+  lBitmap := nil;
+  try
+    // DECODE
+    lBitmap := TImageUtils.Base64ToBitmap(lBase64);
+
+    TImage.Picture.Assign(nil);
+    TImage.Picture.Assign(lBitmap);
+  finally
+    lBitmap.Free;
+  end;
 ```
