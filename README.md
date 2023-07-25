@@ -49,7 +49,7 @@ var
 begin
   lBitmap := nil;
   try
-    // DECODE
+    // DECODE BASE64
     lBitmap := TImageUtils.Base64ToBitmap(lBase64);
 
     TImage.Picture.Assign(nil);
@@ -57,4 +57,19 @@ begin
   finally
     lBitmap.Free;
   end;
+```
+
+## Exemplo:
+
+### Exemplo FMX
+```
+..\Base64Bitmap\FMX\
+```
+
+https://github.com/antoniojmsjr/Base64Bitmap/assets/20980984/d10661f3-0845-41c3-8275-88693117d4df
+
+
+### Servidor REST(VCL)
+```
+..\Base64Bitmap\VCL\
 ```
