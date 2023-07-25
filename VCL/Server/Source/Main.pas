@@ -140,7 +140,7 @@ begin
 
   lblVisualizarBase64Browser.Caption := Format('<a href="http://localhost:%s/base64/%d">GET Base64: %d</a>', [edtServerPort.Text, lID, lID]);
   lblVisualizarBase64Browser.Visible := True;
-  lblVisualizarBitmapBrowser.Caption := Format('<a href="http://localhost:%s/bitmap/%d">GET Image: %d</a>', [edtServerPort.Text, lID, lID]);
+  lblVisualizarBitmapBrowser.Caption := Format('<a href="http://localhost:%s/bitmap/%d">GET Bitmap: %d</a>', [edtServerPort.Text, lID, lID]);
   lblVisualizarBitmapBrowser.Visible := True;
 
   //VIEW IMAGE

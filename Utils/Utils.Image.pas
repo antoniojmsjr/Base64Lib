@@ -1,3 +1,33 @@
+{*********************************************************************************}
+{                                                                                 }
+{           Utils.Image.pas                                                       }
+{                                                                                 }
+{           Copyright (C) Antônio José Medeiros Schneider Júnior                  }
+{                                                                                 }
+{           https://github.com/antoniojmsjr/Base64Bitmap                          }
+{                                                                                 }
+{                                                                                 }
+{*********************************************************************************}
+{  MIT License                                                                    }
+{                                                                                 }
+{  Permission is hereby granted, free of charge, to any person obtaining a copy   }
+{  of this software and associated documentation files (the "Software"), to deal  }
+{  in the Software without restriction, including without limitation the rights   }
+{  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell      }
+{  copies of the Software, and to permit persons to whom the Software is          }
+{  furnished to do so, subject to the following conditions:                       }
+{                                                                                 }
+{  The above copyright notice and this permission notice shall be included in all }
+{  copies or substantial portions of the Software.                                }
+{                                                                                 }
+{  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR     }
+{  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,       }
+{  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE    }
+{  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER         }
+{  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,  }
+{  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE  }
+{  SOFTWARE.                                                                      }
+{*********************************************************************************}
 unit Utils.Image;
 
 interface
@@ -80,31 +110,6 @@ end;
 
 { TImageUtils }
 
-class function TImageUtils.DecodeBase64(pBase64: TStream): TBytes;
-var
-  lOutputStream: TBytesStream;
-  lBase64Encoding: TBase64Encoding;
-begin
-  SetLength(Result, 0);
-
-  lOutputStream := TBytesStream.Create;
-  try
-    pBase64.Seek(0, TSeekOrigin.soBeginning);
-
-    lBase64Encoding := TBase64Encoding.Create(0);
-    try
-      // DECODE
-      lBase64Encoding.Decode(pBase64, lOutputStream);
-    finally
-      lBase64Encoding.Free;
-    end;
-
-    Result := lOutputStream.Bytes;
-  finally
-    lOutputStream.Free;
-  end;
-end;
-
 class function TImageUtils.DetectBitmap(const pBase64: string): TTypeBitpmap;
 var
   lBase64: string;
@@ -168,6 +173,31 @@ begin
   lBase64 := TNetEncoding.Base64.EncodeBytesToString(lSignature);
 
   Result := DetectBitmap(lBase64);
+end;
+
+class function TImageUtils.DecodeBase64(pBase64: TStream): TBytes;
+var
+  lOutputStream: TBytesStream;
+  lBase64Encoding: TBase64Encoding;
+begin
+  SetLength(Result, 0);
+
+  lOutputStream := TBytesStream.Create;
+  try
+    pBase64.Seek(0, TSeekOrigin.soBeginning);
+
+    lBase64Encoding := TBase64Encoding.Create(0);
+    try
+      // DECODE
+      lBase64Encoding.Decode(pBase64, lOutputStream);
+    finally
+      lBase64Encoding.Free;
+    end;
+
+    Result := lOutputStream.Bytes;
+  finally
+    lOutputStream.Free;
+  end;
 end;
 
 class function TImageUtils.DecodeBase64(const pBase64: string): TBytes;
