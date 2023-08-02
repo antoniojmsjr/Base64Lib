@@ -24,6 +24,11 @@ Para codificar e decodificar uma imagem(Bitmap) em Base64, utilizar a classe **T
 ```
 ..\Base64Bitmap\Utils\Utils.Image.pas
 ```
+### FMX
+
+Para os projetos em **Firemonkey** definir a diretiva de compilação `HAS_FMX`:
+
+![image](https://github.com/antoniojmsjr/Base64Bitmap/assets/20980984/439c248f-7873-4eb8-a86f-f70fb88f25c6)
 
 ## Uso da biblioteca:
 
