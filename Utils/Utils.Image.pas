@@ -2,7 +2,7 @@
 {                                                                                 }
 {           Utils.Image.pas                                                       }
 {                                                                                 }
-{           Copyright (C) Antônio José Medeiros Schneider Júnior                  }
+{           Copyright (C) AntÃ´nio JosÃ© Medeiros Schneider JÃºnior                  }
 {                                                                                 }
 {           https://github.com/antoniojmsjr/Base64Bitmap                          }
 {                                                                                 }
@@ -188,7 +188,7 @@ begin
 
     lBase64Encoding := TBase64Encoding.Create(0);
     try
-      // DECODE
+      // DECODE(UTF8)
       lBase64Encoding.Decode(pBase64, lOutputStream);
     finally
       lBase64Encoding.Free;
@@ -208,7 +208,7 @@ begin
 
   lBase64Encoding := TBase64Encoding.Create(0);
   try
-    // DECODE
+    // DECODE(UTF8)
     Result := lBase64Encoding.DecodeStringToBytes(pBase64);
   finally
     lBase64Encoding.Free;
@@ -229,7 +229,7 @@ begin
     try
       pInput.Seek(0, TSeekOrigin.soBeginning);
 
-      // ENCODE
+      // ENCODE(UTF8)
       lBase64Encoding.Encode(pInput, lBase64Stream);
     finally
       lBase64Encoding.Free;
