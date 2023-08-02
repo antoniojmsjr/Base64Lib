@@ -35,30 +35,44 @@ Para os projetos em **Firemonkey** definir a diretiva de compilação `HAS_FMX`:
 ```delphi
 uses Utils.Image.pas;
 ```
-### Base64 para Imagem:
+### Bitmap para Base64:
 
 ```delphi
 var
   lBase64: string;
+  lItem: TCustomBitmapItem;
 begin
   // ENCODE BITMAP
+
+  //VCL
   lBase64 := TImageUtils.BitmapToBase64(TImage.Picture.Bitmap);
+
+  //FMX
+  lItem := TImage.MultiResBitmap.ItemByScale(1, False, True);
+  lBase64 := TImageUtils.BitmapToBase64(lItem.Bitmap);
 ```
 
-### Imagem para Base64:
+### Base64 para Bitmap:
 
 ```delphi
 var
   lBase64: string;
   lBitmap: TBitmap;
+  lItem: TCustomBitmapItem;
 begin
   lBitmap := nil;
   try
     // DECODE BASE64
     lBitmap := TImageUtils.Base64ToBitmap(lBase64);
 
+    //VCL
     TImage.Picture.Assign(nil);
     TImage.Picture.Assign(lBitmap);
+
+    //FMX
+    TImage.MultiResBitmap.Clear;
+    lItem := TImage.MultiResBitmap.ItemByScale(1, False, True);
+    lItem.Bitmap.Assign(lBitmap);
   finally
     lBitmap.Free;
   end;
