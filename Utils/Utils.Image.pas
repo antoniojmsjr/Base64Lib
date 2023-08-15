@@ -1,4 +1,4 @@
-{*********************************************************************************}
+﻿{*********************************************************************************}
 {                                                                                 }
 {           Utils.Image.pas                                                       }
 {                                                                                 }
@@ -34,7 +34,7 @@ interface
 
 uses
   System.SysUtils, System.Classes,
-  {$IFDEF HAS_FMX} FMX.Graphics {$ELSE} Vcl.Graphics {$ENDIF};
+  {$IF DEFINED(HAS_FMX)} FMX.Graphics {$ELSE} Vcl.Graphics {$ENDIF};
 
 type
   TTypeBitpmap = (bmpUnknown, bmpJPEG, bmpPNG, bmpBMP, bmpGIF, bmpTIFF);
@@ -50,8 +50,7 @@ type
     function AsInteger: Integer;
   end;
 
-  // VCL
-  {$IFNDEF HAS_FMX}
+  {$IF NOT DEFINED(HAS_FMX)} // VCL
   TBitmapHelpers = class helper for Vcl.Graphics.TBitmap
   private
     { private declarations }
@@ -101,7 +100,7 @@ uses
 
 { TBitmapHelpers }
 
-{$IFNDEF HAS_FMX}
+{$IF NOT DEFINED(HAS_FMX)} // VCL
 function TBitmapHelpers.IsEmpty: Boolean;
 begin
   Result := (Self.Width = 0) or (Self.Height = 0) or (Self.Canvas.Pixels[0, 0] = clNone);
@@ -274,7 +273,7 @@ end;
 class function TImageUtils.Base64ToBitmap(const pBase64: string): TBitmap;
 var
   lBitmapStream: TStream;
-  {$IFNDEF HAS_FMX} //VCL
+  {$IF NOT DEFINED(HAS_FMX)} // VCL
   lPicture: TPicture;
   {$ENDIF}
 begin
@@ -284,9 +283,9 @@ begin
     lBitmapStream := Base64ToBitmapStream(pBase64);
     lBitmapStream.Position := 0;
 
-    {$IFDEF HAS_FMX}
+    {$IF DEFINED(HAS_FMX)}
     Result := TBitmap.CreateFromStream(lBitmapStream);
-    {$ELSE}
+    {$ELSE} // VCL
     lPicture := TPicture.Create;
     try
       lPicture.LoadFromStream(lBitmapStream);
@@ -305,7 +304,7 @@ end;
 class function TImageUtils.Base64ToBitmap(pBase64: TStream): TBitmap;
 var
   lBitmapStream: TStream;
-  {$IFNDEF HAS_FMX} //VCL
+  {$IF NOT DEFINED(HAS_FMX)} //VCL
   lPicture: TPicture;
   {$ENDIF}
 begin
@@ -315,9 +314,9 @@ begin
     lBitmapStream := Base64ToBitmapStream(pBase64);
     lBitmapStream.Position := 0;
 
-    {$IFDEF HAS_FMX}
+    {$IF DEFINED(HAS_FMX)}
     Result := TBitmap.CreateFromStream(lBitmapStream);
-    {$ELSE}
+    {$ELSE} // VCL
     lPicture := TPicture.Create;
     try
       lPicture.LoadFromStream(lBitmapStream);
