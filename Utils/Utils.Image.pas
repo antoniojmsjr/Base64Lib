@@ -150,11 +150,11 @@ class function TImageUtils.DetectMIMETypes(
   const pTypeBitpmap: TTypeBitpmap): string;
 begin
   case pTypeBitpmap of
-    bmpJPEG:  Result  := 'image/jpeg';
-    bmpPNG:   Result  := 'image/png';
-    bmpBMP:   Result  := 'image/bmp';
-    bmpGIF:   Result  := 'image/gif';
-    bmpTIFF:  Result  := 'image/tiff';
+    bmpJPEG: Result := 'image/jpeg';
+    bmpPNG:  Result := 'image/png';
+    bmpBMP:  Result := 'image/bmp';
+    bmpGIF:  Result := 'image/gif';
+    bmpTIFF: Result := 'image/tiff';
   else
     Result := 'application/octet-stream';
   end;
@@ -178,11 +178,11 @@ end;
 class function TImageUtils.DetectBitmapExt(const pTypeBitpmap: TTypeBitpmap): string;
 begin
   case pTypeBitpmap of
-    bmpJPEG:  Result  := '.jpeg';
-    bmpPNG:   Result  := '.png';
-    bmpBMP:   Result  := '.bmp';
-    bmpGIF:   Result  := '.gif';
-    bmpTIFF:  Result  := '.tiff';
+    bmpJPEG: Result := '.jpeg';
+    bmpPNG:  Result := '.png';
+    bmpBMP:  Result := '.bmp';
+    bmpGIF:  Result := '.gif';
+    bmpTIFF: Result := '.tiff';
   else
     Result := EmptyStr;
   end;
