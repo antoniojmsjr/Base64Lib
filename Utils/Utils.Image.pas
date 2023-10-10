@@ -88,6 +88,7 @@ type
 
     class function DetectBitmap(pBitmap: TStream): TTypeBitpmap; overload;
     class function DetectBitmap(const pBase64: string): TTypeBitpmap; overload;
+    class function DetectBitmapExt(const pTypeBitpmap: TTypeBitpmap): string; overload;
     class function DetectMIMETypes(const pTypeBitpmap: TTypeBitpmap): string; overload;
     class function DetectMIMETypes(pBitmap: TStream): string; overload;
     class function DetectMIMETypes(const pBase64: string): string; overload;
@@ -149,11 +150,11 @@ class function TImageUtils.DetectMIMETypes(
   const pTypeBitpmap: TTypeBitpmap): string;
 begin
   case pTypeBitpmap of
-    bmpJPEG: Result := 'image/jpeg';
-    bmpPNG: Result := 'image/png';
-    bmpBMP: Result := 'image/bmp';
-    bmpGIF: Result := 'image/gif';
-    bmpTIFF: Result := 'image/tiff';
+    bmpJPEG:  Result  := 'image/jpeg';
+    bmpPNG:   Result  := 'image/png';
+    bmpBMP:   Result  := 'image/bmp';
+    bmpGIF:   Result  := 'image/gif';
+    bmpTIFF:  Result  := 'image/tiff';
   else
     Result := 'application/octet-stream';
   end;
@@ -172,6 +173,19 @@ begin
   lBase64 := TNetEncoding.Base64.EncodeBytesToString(lSignature);
 
   Result := DetectBitmap(lBase64);
+end;
+
+class function TImageUtils.DetectBitmapExt(const pTypeBitpmap: TTypeBitpmap): string;
+begin
+  case pTypeBitpmap of
+    bmpJPEG:  Result  := '.jpeg';
+    bmpPNG:   Result  := '.png';
+    bmpBMP:   Result  := '.bmp';
+    bmpGIF:   Result  := '.gif';
+    bmpTIFF:  Result  := '.tiff';
+  else
+    Result := EmptyStr;
+  end;
 end;
 
 class function TImageUtils.DecodeBase64(pBase64: TStream): TBytes;
@@ -490,11 +504,11 @@ function TTypeBitpmapHelper.AsString: string;
 begin
   case Self of
     bmpUnknown: Result := 'UNKNOWN';
-    bmpJPEG: Result := 'JPEG';
-    bmpPNG: Result := 'PNG';
-    bmpBMP: Result := 'BMP';
-    bmpGIF: Result := 'GIF';
-    bmpTIFF: Result := 'TIFF';
+    bmpJPEG:    Result := 'JPEG';
+    bmpPNG:     Result := 'PNG';
+    bmpBMP:     Result := 'BMP';
+    bmpGIF:     Result := 'GIF';
+    bmpTIFF:    Result := 'TIFF';
   end;
 end;
 
