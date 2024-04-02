@@ -14,9 +14,9 @@ Implementado na linguagem Delphi, **Base64Bitmap** é uma biblioteca de **codifi
 
 * `Base64`: É uma forma de codificação que permite representar dados binários usando um conjunto de caracteres seguros, tornando-os adequados para transmissão. É amplamente utilizado em aplicações que lidam com transferência de dados, como em e-mails ou em URLs, para garantir que os dados permaneçam intactos e sem erros durante a transmissão.
 
-* `Bitmap`: É a classe que representa e gerencia imagens em Delphi, permitindo manipulações e exibições dentro da interface gráfica de um aplicativo.
-A classe TBitmap é usada para criar, carregar, manipular e exibir imagens bitmap na interface do usuário do aplicativo Delphi. Ela oferece recursos para carregar imagens de arquivos, desenhar na imagem, ajustar suas dimensões, aplicar operações de pintura, entre outros. Essa classe é particularmente útil para trabalhar com gráficos e imagens em aplicações que necessitam de recursos visuais.
-As imagens armazenadas em um objeto TBitmap podem ser exibidas em componentes visuais como TImage, TPaintBox, TPicture, TCanvas, entre outros. Além disso, o TBitmap também pode ser usado para operações de desenho, edição e processamento de imagens.
+* `Bitmap`: É a classe que representa e gerência imagens no Delphi, permitindo manipulações e exibições dentro da interface gráfica de um aplicativo.
+A classe TBitmap é usada para criar, carregar, manipular e exibir imagens bitmap na interface do aplicativo. Ela oferece recursos para carregar imagens de arquivos, desenhar na imagem, ajustar suas dimensões, aplicar operações de pintura, entre outros. Essa classe é particularmente útil para trabalhar com gráficos e imagens em aplicações que necessitam de recursos visuais.
+As imagens armazenadas em um objeto TBitmap podem ser exibidas em componentes visuais como TImage, TPaintBox, TPicture, TCanvas, entre outros.
 
 # Biblioteca
 
@@ -40,7 +40,7 @@ uses Utils.Image.pas;
 ```delphi
 var
   lBase64: string;
-  lItem: TCustomBitmapItem;
+  lItem: TCustomBitmapItem; // FMX.MultiResBitmap
 begin
   // ENCODE BITMAP
 
@@ -58,7 +58,7 @@ begin
 var
   lBase64: string;
   lBitmap: TBitmap;
-  lItem: TCustomBitmapItem;
+  lItem: TCustomBitmapItem; // FMX.MultiResBitmap
 begin
   lBitmap := nil;
   try
