@@ -22,7 +22,7 @@ Implementado na linguagem Delphi, utiliza o conceito de [fluent interface](https
 
 Desenvolvida especificamente para ambientes Delphi, esta biblioteca oferece uma interface simples e intuitiva, facilitando a codificação e decodificação em Base64, desde a manipulação de strings até a conversão de **tipos complexos**.
 
-#### Recursos:
+#### Recursos
 
 * Compatibilidade: Compatível com as normas e especificações do Base64, garantindo que os dados codificados possam ser transmitidos e armazenados em diferentes sistemas sem perda de integridade.
 * Fácil Integração: Interface simples e bem documentada, permitindo fácil integração com projetos novos ou existentes.
