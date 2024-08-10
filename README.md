@@ -20,11 +20,22 @@
 
 Implementado na linguagem Delphi, utiliza o conceito de [fluent interface](https://en.wikipedia.org/wiki/Fluent_interface) para guiar no uso da biblioteca, desenvolvida para oferecer praticidade e eficiência na codificação e decodificação de dados em Base64.
 
+Desenvolvida especificamente para ambientes Delphi, esta biblioteca oferece uma interface simples e intuitiva, facilitando a codificação e decodificação em Base64, desde a manipulação de strings até a conversão de **tipos complexos**.
+
+#### Tipos complexos:
+
 * `Base64`: É uma forma de codificação que permite representar dados binários usando um conjunto de caracteres seguros, tornando-os adequados para transmissão. É amplamente utilizado em aplicações que lidam com transferência de dados, como em e-mails ou em URLs, para garantir que os dados permaneçam intactos e sem erros durante a transmissão.
 
 * `Bitmap`: É a classe que representa e gerência imagens no Delphi, permitindo manipulações e exibições dentro da interface gráfica de um aplicativo.
 A classe TBitmap é usada para criar, carregar, manipular e exibir imagens bitmap na interface do aplicativo. Ela oferece recursos para carregar imagens de arquivos, desenhar na imagem, ajustar suas dimensões, aplicar operações de pintura, entre outros. Essa classe é particularmente útil para trabalhar com gráficos e imagens em aplicações que necessitam de recursos visuais.
 As imagens armazenadas em um objeto TBitmap podem ser exibidas em componentes visuais como TImage, TPaintBox, TPicture, TCanvas, entre outros.
+
+* `Stream`: É uma classe que representa um fluxo genérico de dados, permitindo a leitura e escrita de bytes sequenciais. É uma parte central do sistema de I/O do Delphi, oferecendo uma base flexível para manipulação de fluxos de dados em várias formas.
+  
+* `Bytes`: É um tipo de dado dinâmico que representa um array de bytes. Ele é frequentemente utilizado para armazenar e manipular sequências de dados binários, como arquivos, fluxos de dados, ou buffers em operações de I/O. Sua natureza de array dinâmico permite que ele seja dimensionado conforme necessário, tornando-o uma escolha comum para operações de buffer e manipulação de dados em uma variedade de contextos, desde I/O até processamento de dados em memória.
+
+#### Recursos:
+
 
 # Biblioteca
 
