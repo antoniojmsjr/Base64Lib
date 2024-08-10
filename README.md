@@ -37,9 +37,11 @@ As imagens armazenadas em um objeto TBitmap podem ser exibidas em componentes vi
 #### Recursos:
 
 > [!WARNING]\
-Para os projetos em **Firemonkey** definir a diretiva de compilação `HAS_FMX`:
+Para os projetos em **Firemonkey** definir a diretiva de compilação `HAS_FMX` em *conditional defines*:
 
-![image](https://github.com/antoniojmsjr/Base64Bitmap/assets/20980984/439c248f-7873-4eb8-a86f-f70fb88f25c6)
+<a href="https://github.com/user-attachments/assets/db3d20a6-8ee0-4b16-a03c-832bc14561e3">
+    <img alt="IPGeolocation" height="500" width="700" src="https://github.com/user-attachments/assets/db3d20a6-8ee0-4b16-a03c-832bc14561e3">
+  </a>
 
 ## ⚙️ Instalação Automatizada
 
