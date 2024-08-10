@@ -40,6 +40,7 @@ As imagens armazenadas em um objeto TBitmap podem ser exibidas em componentes vi
 * Fácil Integração: Interface simples e bem documentada, permitindo fácil integração com projetos novos ou existentes.
 * Suporte: Desenvolvida especificamente para a linguagem Delphi, aproveitando todas as suas características para uma integração nativa e sem complicações.
 * Flexibilidade: Suporta diferentes tipos de dados, desde strings até tipos complexos, permitindo uma ampla gama de aplicações, desde comunicação entre sistemas até armazenamento seguro de informações.
+* Exemplos de uso: Repositório com diversos exemplos de uso da biblioteca, por exemplo, VCL, FMX e um servidor de aplicação em Horse.
 
 > [!WARNING]\
 Para os projetos em **Firemonkey** definir a diretiva de compilação `HAS_FMX` em *conditional defines*:
