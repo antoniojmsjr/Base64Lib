@@ -36,18 +36,34 @@ As imagens armazenadas em um objeto TBitmap podem ser exibidas em componentes vi
 
 #### Recursos:
 
-
-# Biblioteca
-
-Para codificar e decodificar uma imagem(Bitmap) em Base64, utilizar a classe **TImageUtils** da unit Utils.Image.pas.
-```
-..\Base64Bitmap\Utils\Utils.Image.pas
-```
-### FMX
-
+> [!WARNING]\
 Para os projetos em **Firemonkey** definir a diretiva de compilação `HAS_FMX`:
 
 ![image](https://github.com/antoniojmsjr/Base64Bitmap/assets/20980984/439c248f-7873-4eb8-a86f-f70fb88f25c6)
+
+## ⚙️ Instalação Automatizada
+
+Utilizando o [**Boss**](https://github.com/HashLoad/boss/releases/latest) (Dependency manager for Delphi) é possível instalar a biblioteca de forma automatizada.
+
+```
+boss install https://github.com/antoniojmsjr/Base64Lib
+```
+
+## ⚙️ Instalação Manual
+
+Se você optar por instalar manualmente, basta adicionar as seguintes pastas ao seu projeto, em *Project > Options > Delphi Compiler > Target > All Configurations > Search path*
+
+```
+..\Base64Lib\Source
+```
+
+## ⚡️ Uso da biblioteca
+
+Os exemplos estão disponíveis na pasta do projeto:
+
+```
+..\Base64Lib\Samples
+```
 
 ## Uso da biblioteca:
 
