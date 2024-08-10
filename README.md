@@ -6,6 +6,14 @@
 ![Compatibility](https://img.shields.io/badge/Compatibility-VCL,%20Firemonkey,%20DataSnap,%20Horse,%20RDW,%20RADServer-3db36a?style=flat-square)
 ![Delphi Supported Versions](https://img.shields.io/badge/Delphi%20Supported%20Versions-XE7%20and%20above-3db36a?style=flat-square)
 
+</br>
+<p align="center">
+  <a href="https://github.com/antoniojmsjr/Base64Lib/blob/main/Image/Logo.png">
+    <img alt="IPGeolocation" height="200" width="400" src="https://github.com/antoniojmsjr/Base64Lib/blob/main/Image/Logo.png">
+  </a>
+</p>
+</br>
+
 # Base64Bitmap
 
 Biblioteca de codificação e decodificação de imagem(Bitmap) em Base64.
