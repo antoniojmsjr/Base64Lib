@@ -36,6 +36,11 @@ As imagens armazenadas em um objeto TBitmap podem ser exibidas em componentes vi
 
 #### Recursos:
 
+* Compatibilidade: Compatível com as normas e especificações do Base64, garantindo que os dados codificados possam ser transmitidos e armazenados em diferentes sistemas sem perda de integridade.
+* Fácil Integração: Interface simples e bem documentada, permitindo fácil integração com projetos novos ou existentes.
+* Suporte: Desenvolvida especificamente para a linguagem Delphi, aproveitando todas as suas características para uma integração nativa e sem complicações.
+* Flexibilidade: Suporta diferentes tipos de dados, desde strings até tipos complexos, permitindo uma ampla gama de aplicações, desde comunicação entre sistemas até armazenamento seguro de informações.
+
 > [!WARNING]\
 Para os projetos em **Firemonkey** definir a diretiva de compilação `HAS_FMX` em *conditional defines*:
 
