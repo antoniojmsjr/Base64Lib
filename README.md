@@ -16,9 +16,9 @@
 
 # Base64Lib
 
-Biblioteca de codificação e decodificação de dados em Base64.
+**Base64Lib** é uma biblioteca de **codificação** e **decodificação** de dados em **Base64**.
 
-Implementado na linguagem Delphi, **Base64Lib** é uma biblioteca de **codificação** de uma imagem(Bitmap) para Base64 e **decodificação** de Base64 para imagem(Bitmap).
+Implementado na linguagem Delphi, utiliza o conceito de [fluent interface](https://en.wikipedia.org/wiki/Fluent_interface) para guiar no uso da biblioteca, desenvolvida para oferecer praticidade e eficiência na codificação e decodificação de dados em Base64.
 
 * `Base64`: É uma forma de codificação que permite representar dados binários usando um conjunto de caracteres seguros, tornando-os adequados para transmissão. É amplamente utilizado em aplicações que lidam com transferência de dados, como em e-mails ou em URLs, para garantir que os dados permaneçam intactos e sem erros durante a transmissão.
 
