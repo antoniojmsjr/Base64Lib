@@ -20,7 +20,7 @@
 
 Implementado na linguagem Delphi, utiliza o conceito de [fluent interface](https://en.wikipedia.org/wiki/Fluent_interface) para guiar no uso da biblioteca, oferece uma interface simples e intuitiva, facilitando a codificação e decodificação em Base64, desde a manipulação de strings até a conversão de **tipos complexos**.
 
-Para mais informações sobre a utilização da biblioteca, consultar **[Wiki](https://github.com/antoniojmsjr/Base64Lib/wiki)**.
+Para mais informações, consultar **[Wiki](https://github.com/antoniojmsjr/Base64Lib/wiki)**.
 
 #### Recursos
 
