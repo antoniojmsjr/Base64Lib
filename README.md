@@ -117,15 +117,20 @@ begin
 * [FMX](https://github.com/antoniojmsjr/Base64Bitmap/files/12165582/FMX.zip)
 * [Client](https://github.com/antoniojmsjr/Base64Bitmap/files/12165588/Client.zip)
 * [Server](https://github.com/antoniojmsjr/Base64Bitmap/files/12165595/Server.zip)
-  
+
+### Exemplo Base64LibApp
+```
+..\Base64Lib\Samples\Base64LibApp\
+```
+
 ### Exemplo FMX
 ```
-..\Base64Bitmap\FMX\
+..\Base64Lib\Samples\Bitmap\FMX\
 ```
 https://github.com/antoniojmsjr/Base64Bitmap/assets/20980984/d10661f3-0845-41c3-8275-88693117d4df
 ### Servidor REST(VCL)
 ```
-..\Base64Bitmap\VCL\
+..\Base64Lib\Samples\Bitmap\VCL\
 ```
 https://github.com/antoniojmsjr/Base64Bitmap/assets/20980984/f9dab252-22fb-43a5-9ca1-cc7b6c36d75c
 
