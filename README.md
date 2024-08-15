@@ -24,11 +24,10 @@ Para mais informações, consultar **[Wiki](https://github.com/antoniojmsjr/Base
 
 #### Recursos
 
-* Codificação: Permiti vários combinações de codificação: bitmap para base64, texto para base64, stream para base64 e arquivo para base64 de base64 para texto, base64 para stream, base64 para bitmap.
-* Fácil Integração: Interface simples e bem documentada, permitindo fácil integração com projetos novos ou existentes.
-* Suporte: Desenvolvida especificamente para a linguagem Delphi, aproveitando todas as suas características para uma integração nativa e sem complicações.
-* Flexibilidade: Suporta diferentes tipos de dados, desde strings até tipos complexos, permitindo uma ampla gama de aplicações, desde comunicação entre sistemas até armazenamento seguro de informações.
-* Exemplos de uso: Repositório com diversos exemplos de uso da biblioteca, por exemplo, VCL, FMX e um servidor de aplicação em Horse.
+* Fácil Integração: Base64Lib tem uma interface simples e bem documentada, permitindo fácil integração com projetos novos ou existentes.
+* Suporte: Base64Lib foi desenvolvida especificamente para a linguagem `Delphi`, aproveitando todas as suas características para uma integração nativa e sem complicações.
+* Flexibilidade: Suporta diferentes tipos de dados, desde `string` até tipos complexos(`TBitmap`, `TStream`, `TBytes` e etc.), permitindo uma ampla gama de aplicações, desde comunicação entre sistemas até armazenamento.
+* Exemplos de uso: Repositório com diversos exemplos de uso da biblioteca, por exemplo, VCL, FMX e um servidor de aplicação em [Horse](https://github.com/HashLoad/horse).
 </br>
 
 > [!WARNING]\
