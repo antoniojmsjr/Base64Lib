@@ -1,8 +1,8 @@
 ![Maintained YES](https://img.shields.io/badge/Maintained%3F-yes-green.svg?style=flat-square&color=important)
 ![Memory Leak Verified YES](https://img.shields.io/badge/Memory%20Leak%20Verified%3F-yes-green.svg?style=flat-square&color=important)
-![Stars](https://img.shields.io/github/stars/antoniojmsjr/Base64Bitmap.svg?style=flat-square)
-![Forks](https://img.shields.io/github/forks/antoniojmsjr/Base64Bitmap.svg?style=flat-square)
-![Issues](https://img.shields.io/github/issues/antoniojmsjr/Base64Bitmap.svg?style=flat-square&color=blue)</br>
+![Stars](https://img.shields.io/github/stars/antoniojmsjr/Base64Lib.svg?style=flat-square)
+![Forks](https://img.shields.io/github/forks/antoniojmsjr/Base64Lib.svg?style=flat-square)
+![Issues](https://img.shields.io/github/issues/antoniojmsjr/Base64Lib.svg?style=flat-square&color=blue)</br>
 ![Compatibility](https://img.shields.io/badge/Compatibility-VCL,%20Firemonkey,%20DataSnap,%20Horse,%20RDW,%20RADServer-3db36a?style=flat-square)
 ![Delphi Supported Versions](https://img.shields.io/badge/Delphi%20Supported%20Versions-XE7%20and%20higher-3db36a?style=flat-square)
 
@@ -112,29 +112,28 @@ begin
 
 ## Exemplos:
 
-### Exemplo compilado
+#### Exemplo compilado
 
 * [FMX](https://github.com/antoniojmsjr/Base64Bitmap/files/12165582/FMX.zip)
 * [Client](https://github.com/antoniojmsjr/Base64Bitmap/files/12165588/Client.zip)
 * [Server](https://github.com/antoniojmsjr/Base64Bitmap/files/12165595/Server.zip)
 
-### Exemplo Base64LibApp
+#### Exemplo Base64LibApp
 ```
 ..\Base64Lib\Samples\Base64LibApp\
 ```
-
-### Exemplo FMX
+#### Exemplo FMX
 ```
 ..\Base64Lib\Samples\Bitmap\FMX\
 ```
 https://github.com/antoniojmsjr/Base64Bitmap/assets/20980984/d10661f3-0845-41c3-8275-88693117d4df
-### Servidor REST(VCL)
+#### Servidor REST(VCL)
 ```
 ..\Base64Lib\Samples\Bitmap\VCL\
 ```
 https://github.com/antoniojmsjr/Base64Bitmap/assets/20980984/f9dab252-22fb-43a5-9ca1-cc7b6c36d75c
 
 ## Licença
-`Base64Lib` is free and open-source software licensed under the [![License](https://img.shields.io/badge/license-MIT%202-blue.svg)](https://github.com/antoniojmsjr/Base64Bitmap/blob/master/LICENSE)
+`Base64Lib` is free and open-source software licensed under the [![License](https://img.shields.io/badge/license-MIT%202-blue.svg)](https://github.com/antoniojmsjr/Base64Lib/blob/master/LICENSE)
 
 [:arrow_up: Ir para o Topo](https://github.com/antoniojmsjr/Base64Lib/tree/main#base64lib)
