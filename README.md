@@ -60,54 +60,146 @@ Os exemplos estão disponíveis na pasta do projeto:
 ..\Base64Lib\Samples
 ```
 
-## Uso da biblioteca:
+### [Codificação](https://github.com/antoniojmsjr/Base64Lib/wiki/Encode)
 
 ```delphi
-uses Utils.Image.pas;
+Uses
+  Base64Lib;
 ```
-#### Bitmap para Base64:
+#### Texto >> Base64
 
 ```delphi
 var
+  lEncode: IEncodeParse;
   lBase64: string;
-  lItem: TCustomBitmapItem; // FMX.MultiResBitmap
+  lBase64Size: Int64;
+  lBase64MD5: string;
 begin
-  // ENCODE BITMAP
+  lEncode := TBase64Lib
+    .Build
+      .Encode
+        .Text('Base64Lib');
 
-  //VCL
-  lBase64 := TImageUtils.BitmapToBase64(TImage.Picture.Bitmap);
-
-  //FMX
-  lItem := TImage.MultiResBitmap.ItemByScale(1, False, True);
-  lBase64 := TImageUtils.BitmapToBase64(lItem.Bitmap);
+  lBase64 := lEncode.AsString;
+  lBase64Size := lEncode.Size;
+  lBase64MD5 := lEncode.MD5;
+end;
 ```
 
-#### Base64 para Bitmap:
-
+#### Bitmap >> Base64
 ```delphi
 var
-  lBase64: string;
   lBitmap: TBitmap;
-  lItem: TCustomBitmapItem; // FMX.MultiResBitmap
+  lEncode: IEncodeParse;
+  lBase64: string;
+  lBase64Size: Int64;
+  lBase64MD5: string;
 begin
+  lBitmap := TBitmap(Timage.Picture.Graphic); //VCL
+  lBitmap := Timage.Bitmap; //FMX 
+
+  lEncode := TBase64Lib
+    .Build
+      .Encode
+        .Bitmap(lBitmap);
+
+  lBase64 := lEncode.AsString;
+  lBase64Size := lEncode.Size;
+  lBase64MD5 := lEncode.MD5;
+```
+
+### [Decodificação](https://github.com/antoniojmsjr/Base64Lib/wiki/Decode)
+
+#### Base64 >> Texto
+```delphi
+var
+  lDecode: IDecodeParse;
+  lText: string;
+  lSize: Int64;
+  lMD5: string;
+begin
+  lDecode := TBase64Lib
+    .Build
+      .Decode
+        .Text('QmFzZTY0TGli');
+
+  if not Assigned(lDecode) then
+    Exit;
+
+  lText := lDecode.AsString;
+  lSize := lDecode.Size;
+  lMD5 := lDecode.MD5;
+end;
+```
+
+#### Base64 >> Bitmap
+```delphi
+var
+  lDecode: IDecodeParse;
+  lBitmapStream: TStream;
+  lBitmap: TBitmap;
+  lItem: TCustomBitmapItem; // FMX
+  lRect: TRect; // FMX
+  lSize: Int64;
+  lMD5: string;
+begin
+  lDecode := TBase64Lib
+    .Build
+      .Decode
+        .Text('QmFzZTY0TGli');
+
+  if not Assigned(lDecode) then
+    Exit;
+  
+  // VCL
   lBitmap := nil;
   try
-    // DECODE BASE64
-    lBitmap := TImageUtils.Base64ToBitmap(lBase64);
-
-    //VCL
+    lBitmap := lDecode.AsBitmap;
+    
     TImage.Picture.Assign(nil);
     TImage.Picture.Assign(lBitmap);
-
-    //FMX
-    TImage.MultiResBitmap.Clear;
-    lItem := TImage.MultiResBitmap.ItemByScale(1, False, True);
-    lItem.Bitmap.Assign(lBitmap);
   finally
     lBitmap.Free;
   end;
+
+  // FMX
+  lBitmap := nil;
+  try
+    lBitmap := lDecode.AsBitmap;
+
+    lRect := TRect.Create(TPoint.Zero);
+    lRect.Left := 0;
+    lRect.Top := 0;
+    lRect.Width := lBitmap.Bounds.Width;
+    lRect.Height := lBitmap.Bounds.Height;
+
+    imgFileBase64ToBitmap.MultiResBitmap.Clear;
+    lItem := imgFileBase64ToBitmap.MultiResBitmap.ItemByScale(1, False, True);
+    lItem.Bitmap.Width := lBitmap.Bounds.Width;
+    lItem.Bitmap.Height  := lBitmap.Bounds.Height;
+    lItem.Bitmap.CopyFromBitmap(lBitmap, lRect, 0, 0);
+  finally
+    lBitmap.Free;
+  end;
+
+  OU
+
+  // FMX
+  lBitmapStream := nil;
+  try
+    lBitmapStream := lDecode.AsStream;
+
+    imgFileBase64ToBitmap.MultiResBitmap.Clear;
+    lItem := imgFileBase64ToBitmap.MultiResBitmap.ItemByScale(1, False, True);
+    lItem.Bitmap.LoadFromStream(lBitmapStream);
+  finally
+    lBitmapStream.Free;
+  end;
+
+  lSize := lDecode.Size;
+  lMD5 := lDecode.MD5;
+end;
 ```
-## Exemplos:
 
 #### Exemplo compilado
 
@@ -131,6 +223,7 @@ https://github.com/user-attachments/assets/222719ca-8b65-4297-b3b4-c654ca0b2114
 ..\Base64Lib\Samples\Bitmap\VCL\
 ```
 https://github.com/user-attachments/assets/2a2b3cd5-5720-456e-a900-5b8c1117dc06
+
 ## Licença
 `Base64Lib` is free and open-source software licensed under the [![License](https://img.shields.io/badge/license-MIT%202-blue.svg)](https://github.com/antoniojmsjr/Base64Lib/blob/master/LICENSE)
 
