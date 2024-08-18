@@ -138,7 +138,7 @@ var
   lDecode: IDecodeParse;
   lBitmapStream: TStream;
   lBitmap: TBitmap;
-  lItem: TCustomBitmapItem; // FMX
+  lItem: TCustomBitmapItem; // FMX - Unit FMX.MultiResBitmap
   lRect: TRect; // FMX
   lSize: Int64;
   lMD5: string;
