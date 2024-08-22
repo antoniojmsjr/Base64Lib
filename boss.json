@@ -1,7 +1,7 @@
 {
 	"name": "Base64Lib",
 	"description": "Base64Lib é uma biblioteca de codificação e decodificação de dados em Base64.",
-	"version": "v1.0.0",
+	"version": "v1.1.0",
 	"homepage": "https://github.com/antoniojmsjr/Base64Lib",
 	"mainsrc": "Source",
 	"projects": [],
