@@ -27,8 +27,8 @@ unit Base64Lib.Decode;
 interface
 
 uses
-  System.SysUtils, System.Classes, Base64Lib.Interfaces,
-  {$IF DEFINED(HAS_FMX)} FMX.Graphics, System.Rtti {$ELSE} Vcl.Graphics {$ENDIF};
+  System.SysUtils, System.Classes, Base64Lib.Interfaces, System.Rtti,
+  {$IF DEFINED(HAS_FMX)}FMX.Graphics{$ELSE}Vcl.Graphics{$ENDIF};
 
 type
   TBase64LibDecodeCustom = class(TInterfacedObject)
@@ -60,8 +60,8 @@ type
 implementation
 
 uses
-  System.NetEncoding, Vcl.Imaging.jpeg, Vcl.Imaging.pngimage, Vcl.Imaging.GIFImg,
-  Base64Lib.Types, Base64Lib.Parse;
+  {$IF NOT DEFINED(HAS_FMX)}Vcl.Imaging.jpeg, Vcl.Imaging.pngimage, Vcl.Imaging.GIFImg,{$ENDIF}
+  System.NetEncoding, Base64Lib.Types, Base64Lib.Parse;
 
 {$REGION 'TBase64LibDecodeCustom'}
 function TBase64LibDecodeCustom.Decode(pInput: TStream): TBytes;

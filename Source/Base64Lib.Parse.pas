@@ -27,8 +27,8 @@ unit Base64Lib.Parse;
 interface
 
 uses
-  System.SysUtils, System.Classes, Base64Lib.Interfaces, Base64Lib.Types,
-  {$IF DEFINED(HAS_FMX)} FMX.Graphics, System.Rtti {$ELSE} Vcl.Graphics {$ENDIF};
+  System.SysUtils, System.Classes, Base64Lib.Interfaces, System.Rtti,
+  {$IF DEFINED(HAS_FMX)}FMX.Graphics{$ELSE}Vcl.Graphics{$ENDIF};
 
 type
   TParseCustom = class(TInterfacedObject)
@@ -45,7 +45,7 @@ type
     { protected declarations }
   public
     { public declarations }
-    constructor Create(const pBytes: TBytes); reintroduce;
+    constructor Create(const pBytes: TBytes); reintroduce; virtual;
     destructor Destroy; override;
   end;
 
@@ -63,10 +63,26 @@ type
 implementation
 
 uses
-  System.NetEncoding, System.Hash, Vcl.Imaging.jpeg, Vcl.Imaging.pngimage,
-  Vcl.Imaging.GIFImg;
+  {$IF CompilerVersion >= 30}System.Hash,{$ELSE}IdHashMessageDigest,{$ENDIF}
+  {$IF NOT DEFINED(HAS_FMX)}Vcl.Imaging.jpeg, Vcl.Imaging.pngimage, Vcl.Imaging.GIFImg,{$ENDIF}
+  IdGlobal, System.NetEncoding, Base64Lib.Types;
 
 {$REGION 'TParseCustom'}
+procedure TBytesToTIdBytes(const pInput: TBytes; var pOutput: TIdBytes);
+var
+  lLengthBytes: Integer;
+begin
+  lLengthBytes := Length(pInput);
+  if (lLengthBytes = 0) then
+  begin
+    SetLength(pOutput, 0);
+    Exit;
+  end;
+
+  SetLength(pOutput, lLengthBytes);
+  move(Pointer(pInput)^, Pointer(pOutput)^, lLengthBytes);
+end;
+
 constructor TParseCustom.Create(const pBytes: TBytes);
 begin
   FStream := TBytesStream.Create(pBytes);
@@ -81,12 +97,28 @@ end;
 
 function TParseCustom.MD5: string;
 var
+{$IF CompilerVersion >= 30}
   lHashMD5: THashMD5;
+{$ELSE}
+  lIdHashMessageDigest5: TIdHashMessageDigest5;
+  lIdBytes: TIdBytes;
+{$ENDIF}
 begin
+{$IF CompilerVersion >= 30}
   lHashMD5 := THashMD5.Create;
   lHashMD5.Reset;
   lHashMD5.Update(FStream.Bytes);
   Result := lHashMD5.HashAsString;
+{$ELSE}
+  lIdHashMessageDigest5 := TIdHashMessageDigest5.Create;
+  try
+    TBytesToTIdBytes(FStream.Bytes, lIdBytes);
+    Result := lIdHashMessageDigest5.HashBytesAsHex(lIdBytes);
+  finally
+    lIdHashMessageDigest5.Free;
+  end;
+{$ENDIF}
+  Result := LowerCase(Result);
 end;
 
 procedure TParseCustom.SaveToFile(const pFileName: string);
@@ -120,9 +152,8 @@ end;
 
 function TParseCustom.AsStream: TStream;
 begin
-  Result := TStringStream.Create('', TEncoding.UTF8);
   FStream.Position := 0;
-  Result.CopyFrom(FStream, 0);
+  Result := TBytesStream.Create(FStream.Bytes);
   Result.Position := 0;
 end;
 
@@ -137,17 +168,29 @@ function TDecodeParse.AsBitmap: TBitmap;
 {$IF NOT DEFINED(HAS_FMX)} // VCL
 var
   lPicture: TPicture;
+  {$IF CompilerVersion < 30}
+  lWICImage: TWICImage;
+  {$ENDIF}
 {$ENDIF}
 begin
-  {$IF DEFINED(HAS_FMX)}
+  {$IF DEFINED(HAS_FMX)} // FMX
   FStream.Position := 0;
   Result := TBitmap.CreateFromStream(FStream);
   {$ELSE} // VCL
   lPicture := TPicture.Create;
   try
     FStream.Position := 0;
+    {$IF CompilerVersion >= 30}
     lPicture.LoadFromStream(FStream);
-
+    {$ELSE}
+    lWICImage := TWICImage.Create;
+    try
+      lWICImage.LoadFromStream(FStream);
+      lPicture.Assign(lWICImage);
+    finally
+      lWICImage.Free;
+    end;
+    {$ENDIF}
     Result := TBitmap.Create;
     Result.Assign(lPicture.Graphic);
   finally

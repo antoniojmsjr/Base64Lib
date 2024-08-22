@@ -27,8 +27,8 @@ unit Base64Lib.Interfaces;
 interface
 
 uses
-  System.SysUtils, System.Classes, System.IOUtils,
-  {$IF DEFINED(HAS_FMX)} FMX.Graphics, System.Rtti {$ELSE} Vcl.Graphics {$ENDIF};
+  System.SysUtils, System.Classes, System.IOUtils, System.Rtti,
+  {$IF DEFINED(HAS_FMX)}FMX.Graphics{$ELSE}Vcl.Graphics{$ENDIF};
 
 type
   IBase64LibEncode = interface;

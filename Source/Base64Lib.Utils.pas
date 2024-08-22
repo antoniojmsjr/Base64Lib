@@ -27,8 +27,8 @@ unit Base64Lib.Utils;
 interface
 
 uses
-  System.Classes, System.SysUtils, System.Hash,
-  {$IF DEFINED(HAS_FMX)} FMX.Graphics, System.Rtti {$ELSE} Vcl.Graphics {$ENDIF};
+  System.Classes, System.SysUtils, System.Rtti,
+  {$IF DEFINED(HAS_FMX)}FMX.Graphics{$ELSE}Vcl.Graphics{$ENDIF};
 
 type
   TTypeBitpmap = (bmpUnknown, bmpJPEG, bmpPNG, bmpBMP, bmpGIF, bmpTIFF);
@@ -81,7 +81,9 @@ type
 implementation
 
 uses
-  System.NetEncoding, Vcl.Imaging.jpeg, Vcl.Imaging.pngimage, Vcl.Imaging.GIFImg;
+  {$IF CompilerVersion >= 30}System.Hash,{$ELSE}IdHashMessageDigest,{$ENDIF}
+  {$IF NOT DEFINED(HAS_FMX)}Vcl.Imaging.jpeg, Vcl.Imaging.pngimage, Vcl.Imaging.GIFImg,{$ENDIF}
+  IdGlobal, System.NetEncoding;
 
 {$REGION 'TTypeBitpmapHelper'}
 function TTypeBitpmapHelper.AsExt: string;
@@ -187,6 +189,20 @@ end;
 {$ENDREGION}
 
 {$REGION 'TUtilsBitmap'}
+procedure TBytesToTIdBytes(const pInput: TBytes; var pOutput: TIdBytes);
+var
+  lLengthBytes: Integer;
+begin
+  lLengthBytes := Length(pInput);
+  if (lLengthBytes = 0) then
+  begin
+    SetLength(pOutput, 0);
+    Exit;
+  end;
+  SetLength(pOutput, lLengthBytes);
+  Move(Pointer(pInput)^, Pointer(pOutput)^, lLengthBytes);
+end;
+
 class function TUtilsString.GetMD5FromBitmap(const pBitmap: TBitmap): string;
 var
   lBitmap: TStream;
@@ -208,32 +224,97 @@ end;
 
 class function TUtilsString.GetMD5FromBytes(const pBytes: TBytes): string;
 var
+{$IF CompilerVersion >= 30}
   lHashMD5: THashMD5;
+{$ELSE}
+  lIdHashMessageDigest5: TIdHashMessageDigest5;
+  lIdBytes: TIdBytes;
+{$ENDIF}
 begin
+{$IF CompilerVersion >= 30}
   lHashMD5 := THashMD5.Create;
   lHashMD5.Reset;
   lHashMD5.Update(pBytes);
-
   Result := lHashMD5.HashAsString;
+{$ELSE}
+  lIdHashMessageDigest5 := TIdHashMessageDigest5.Create;
+  try
+    TBytesToTIdBytes(pBytes, lIdBytes);
+    Result := lIdHashMessageDigest5.HashBytesAsHex(lIdBytes);
+  finally
+    lIdHashMessageDigest5.Free;
+  end;
+{$ENDIF}
+  Result := LowerCase(Result);
 end;
 
 class function TUtilsString.GetMD5FromFile(const pFileName: TFileName): string;
+{$IF CompilerVersion < 30}
+var
+  lIdHashMessageDigest5: TIdHashMessageDigest5;
+  lFileStream: TFileStream;
+{$ENDIF}
 begin
+{$IF CompilerVersion >= 30}
   Result := THashMD5.GetHashStringFromFile(pFileName);
+{$ELSE}
+  lFileStream := TFileStream.Create(pFileName, fmOpenRead OR fmShareDenyWrite);
+  try
+    lIdHashMessageDigest5 := TIdHashMessageDigest5.Create;
+    try
+      lFileStream.Position := 0;
+      Result := lIdHashMessageDigest5.HashStreamAsHex(lFileStream);
+    finally
+      lIdHashMessageDigest5.Free;
+    end;
+  finally
+    lFileStream.Free;
+  end;
+{$ENDIF}
+  Result := LowerCase(Result);
 end;
 
 class function TUtilsString.GetMD5FromStream(const pStream: TStream): string;
+{$IF CompilerVersion < 30}
+var
+  lIdHashMessageDigest5: TIdHashMessageDigest5;
+{$ENDIF}
 begin
   Result := EmptyStr;
   if not Assigned(pStream) then
     Exit;
-
+{$IF CompilerVersion >= 30}
+  pStream.Position := 0;
   Result := THashMD5.GetHashString(pStream);
+{$ELSE}
+  lIdHashMessageDigest5 := TIdHashMessageDigest5.Create;
+  try
+    pStream.Position := 0;
+    Result := lIdHashMessageDigest5.HashStreamAsHex(pStream);
+  finally
+    lIdHashMessageDigest5.Free;
+  end;
+{$ENDIF}
+  Result := LowerCase(Result);
 end;
 
 class function TUtilsString.GetMD5FromText(const pText: string): string;
+{$IF CompilerVersion < 30}
+var
+  lIdHashMessageDigest5: TIdHashMessageDigest5;
+{$ENDIF}
 begin
+{$IF CompilerVersion >= 30}
   Result := THashMD5.GetHashString(pText);
+{$ELSE}
+  lIdHashMessageDigest5 := TIdHashMessageDigest5.Create;
+  try
+    Result := lIdHashMessageDigest5.HashStringAsHex(pText);
+  finally
+    lIdHashMessageDigest5.Free;
+  end;
+{$ENDIF}
+  Result := LowerCase(Result);
 end;
 
 class function TUtilsString.GetSizeFromBytes(const pBytes: TBytes): Int64;

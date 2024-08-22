@@ -28,7 +28,7 @@ interface
 
 uses
   System.SysUtils, System.Classes,
-  {$IF DEFINED(HAS_FMX)} FMX.Graphics {$ELSE} Vcl.Graphics {$ENDIF};
+  {$IF DEFINED(HAS_FMX)}FMX.Graphics{$ELSE}Vcl.Graphics{$ENDIF};
 
 type
   EBase64Lib = class(Exception)
