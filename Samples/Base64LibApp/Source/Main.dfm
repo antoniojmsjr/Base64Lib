@@ -37,7 +37,6 @@ object frmBase64LibApp: TfrmBase64LibApp
     Caption = 'pnlHeader'
     ShowCaption = False
     TabOrder = 0
-    ExplicitWidth = 819
     object imgLogo: TImage
       Left = 0
       Top = 0
@@ -246,15 +245,13 @@ object frmBase64LibApp: TfrmBase64LibApp
       Caption = 'pnlHeaderApp'
       ShowCaption = False
       TabOrder = 0
-      ExplicitLeft = 599
       object lblHeaderAppGithub: TLinkLabel
         AlignWithMargins = True
         Left = 3
         Top = 23
-        Width = 214
+        Width = 209
         Height = 17
         Margins.Bottom = 0
-        Align = alTop
         Caption = 'https://github.com/antoniojmsjr/Base64Lib'
         Color = clBtnFace
         Font.Charset = DEFAULT_CHARSET
@@ -266,16 +263,14 @@ object frmBase64LibApp: TfrmBase64LibApp
         ParentFont = False
         TabOrder = 0
         OnLinkClick = lblHeaderAppGithubLinkClick
-        ExplicitWidth = 209
       end
       object lblHeaderAppName: TLinkLabel
         AlignWithMargins = True
         Left = 3
         Top = 3
-        Width = 214
+        Width = 61
         Height = 17
         Margins.Bottom = 0
-        Align = alTop
         Caption = 'Base64Lib'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = 5131854
@@ -284,16 +279,14 @@ object frmBase64LibApp: TfrmBase64LibApp
         Font.Style = [fsBold]
         ParentFont = False
         TabOrder = 1
-        ExplicitWidth = 61
       end
       object lblHeaderBase64Online: TLinkLabel
         AlignWithMargins = True
         Left = 3
         Top = 43
-        Width = 214
+        Width = 141
         Height = 17
         Margins.Bottom = 0
-        Align = alTop
         Caption = 'Base64 converter online'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = 5131854
@@ -302,16 +295,14 @@ object frmBase64LibApp: TfrmBase64LibApp
         Font.Style = [fsBold]
         ParentFont = False
         TabOrder = 2
-        ExplicitWidth = 141
       end
       object lblHeaderBase64OnlineLink: TLinkLabel
         AlignWithMargins = True
         Left = 3
         Top = 63
-        Width = 214
+        Width = 106
         Height = 17
         Margins.Bottom = 0
-        Align = alTop
         Caption = 'https://base64.guru/'
         Color = clBtnFace
         Font.Charset = DEFAULT_CHARSET
@@ -323,7 +314,6 @@ object frmBase64LibApp: TfrmBase64LibApp
         ParentFont = False
         TabOrder = 3
         OnLinkClick = lblHeaderBase64OnlineLinkLinkClick
-        ExplicitWidth = 106
       end
     end
   end
@@ -332,16 +322,14 @@ object frmBase64LibApp: TfrmBase64LibApp
     Top = 159
     Width = 814
     Height = 501
-    ActivePage = tbsFileBase64
+    ActivePage = tbsTextBase64
     Align = alClient
     Style = tsFlatButtons
     TabHeight = 25
     TabOrder = 1
     TabWidth = 260
-    ExplicitWidth = 819
     object tbsTextBase64: TTabSheet
       Caption = 'Text <-- --> Base64'
-      ExplicitWidth = 811
       object bvlTextBase64: TBevel
         AlignWithMargins = True
         Left = 403
@@ -501,7 +489,6 @@ object frmBase64LibApp: TfrmBase64LibApp
         Caption = 'pnlTextBase64Right'
         ShowCaption = False
         TabOrder = 1
-        ExplicitWidth = 402
         object lblTextBase64InputBase64: TLabel
           AlignWithMargins = True
           Left = 3
@@ -536,12 +523,10 @@ object frmBase64LibApp: TfrmBase64LibApp
           Height = 155
           Align = alTop
           BorderStyle = bsNone
-          ReadOnly = True
           ScrollBars = ssBoth
           TabOrder = 0
           WantReturns = False
           WordWrap = False
-          ExplicitWidth = 396
         end
         object btnTextBase64Decode: TButton
           AlignWithMargins = True
@@ -557,7 +542,6 @@ object frmBase64LibApp: TfrmBase64LibApp
           Caption = 'Base64 >> Text'
           TabOrder = 1
           OnClick = btnTextBase64DecodeClick
-          ExplicitWidth = 302
         end
         object mmoTextBase64OutputText: TMemo
           AlignWithMargins = True
@@ -574,7 +558,6 @@ object frmBase64LibApp: TfrmBase64LibApp
           TabOrder = 2
           WantReturns = False
           WordWrap = False
-          ExplicitWidth = 396
         end
         object stbTextBase64OutputText: TStatusBar
           AlignWithMargins = True
@@ -597,7 +580,6 @@ object frmBase64LibApp: TfrmBase64LibApp
             item
               Width = 50
             end>
-          ExplicitWidth = 396
         end
         object stbTextBase64InputBase64: TStatusBar
           AlignWithMargins = True
@@ -621,14 +603,12 @@ object frmBase64LibApp: TfrmBase64LibApp
             item
               Width = 50
             end>
-          ExplicitWidth = 396
         end
       end
     end
     object tbsBitmapBase64: TTabSheet
       Caption = 'Bitmap <-- --> Base64'
       ImageIndex = 1
-      ExplicitWidth = 811
       object bvlBitmapBase64: TBevel
         AlignWithMargins = True
         Left = 403
@@ -938,7 +918,6 @@ object frmBase64LibApp: TfrmBase64LibApp
         Caption = 'pnlBitmapBase64Right'
         ShowCaption = False
         TabOrder = 1
-        ExplicitWidth = 402
         object lblBitmapBase64InputBase64: TLabel
           AlignWithMargins = True
           Left = 3
@@ -985,12 +964,10 @@ object frmBase64LibApp: TfrmBase64LibApp
           Height = 155
           Align = alTop
           BorderStyle = bsNone
-          ReadOnly = True
           ScrollBars = ssBoth
           TabOrder = 0
           WantReturns = False
           WordWrap = False
-          ExplicitWidth = 396
         end
         object btnBitmapBase64Decode: TButton
           AlignWithMargins = True
@@ -1006,7 +983,6 @@ object frmBase64LibApp: TfrmBase64LibApp
           Caption = 'Base64 >> Bitmap'
           TabOrder = 1
           OnClick = btnBitmapBase64DecodeClick
-          ExplicitWidth = 302
         end
         object stbBitmapBase64OutputBitmap: TStatusBar
           AlignWithMargins = True
@@ -1029,7 +1005,6 @@ object frmBase64LibApp: TfrmBase64LibApp
             item
               Width = 50
             end>
-          ExplicitWidth = 396
         end
         object stbBitmapBase64InputBase64: TStatusBar
           AlignWithMargins = True
@@ -1053,14 +1028,16 @@ object frmBase64LibApp: TfrmBase64LibApp
             item
               Width = 50
             end>
-          ExplicitWidth = 396
         end
       end
     end
     object tbsFileBase64: TTabSheet
       Caption = 'File <-- --> Base64'
       ImageIndex = 2
-      ExplicitWidth = 811
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object bvlFileBase64: TBevel
         AlignWithMargins = True
         Left = 403
@@ -1196,12 +1173,11 @@ object frmBase64LibApp: TfrmBase64LibApp
             AlignWithMargins = True
             Left = 5
             Top = 142
-            Width = 390
+            Width = 12
             Height = 13
             Align = alBottom
             Caption = '...'
             WordWrap = True
-            ExplicitWidth = 12
           end
           object btnFileBase64InputFile: TButton
             Left = 50
@@ -1224,8 +1200,6 @@ object frmBase64LibApp: TfrmBase64LibApp
         Caption = 'pnlFileBase64LeftRight'
         ShowCaption = False
         TabOrder = 1
-        ExplicitLeft = 406
-        ExplicitWidth = 402
         object lblFileBase64InputBase64: TLabel
           AlignWithMargins = True
           Left = 3
@@ -1266,7 +1240,6 @@ object frmBase64LibApp: TfrmBase64LibApp
           TabOrder = 0
           WantReturns = False
           WordWrap = False
-          ExplicitWidth = 396
         end
         object stbFileBase64InputBase64: TStatusBar
           AlignWithMargins = True
@@ -1290,7 +1263,6 @@ object frmBase64LibApp: TfrmBase64LibApp
             item
               Width = 50
             end>
-          ExplicitWidth = 396
         end
         object btnFileBase64Decode: TButton
           AlignWithMargins = True
@@ -1306,7 +1278,6 @@ object frmBase64LibApp: TfrmBase64LibApp
           Caption = 'Base64 >> File'
           TabOrder = 2
           OnClick = btnFileBase64DecodeClick
-          ExplicitWidth = 302
         end
         object gbxFileBase64OutputFile: TGroupBox
           Left = 0
@@ -1316,10 +1287,6 @@ object frmBase64LibApp: TfrmBase64LibApp
           Align = alClient
           Caption = ' File Saved '
           TabOrder = 3
-          ExplicitLeft = 3
-          ExplicitTop = 389
-          ExplicitWidth = 402
-          ExplicitHeight = 49
           object lblFileBase64OutputFile: TLabel
             AlignWithMargins = True
             Left = 22
@@ -1356,7 +1323,6 @@ object frmBase64LibApp: TfrmBase64LibApp
             item
               Width = 50
             end>
-          ExplicitWidth = 396
         end
       end
     end
