@@ -70,7 +70,8 @@ implementation
 
 uses
   System.Types, Winapi.ShellApi, Vcl.Imaging.jpeg, Vcl.Imaging.pngimage,
-  Vcl.Imaging.GIFImg, System.NetEncoding, Horse.Commons, Base64Lib, Base64Lib.Utils;
+  Vcl.Imaging.GIFImg, System.NetEncoding, Horse.Commons, Base64Lib, Base64Lib.Utils,
+  Web.HTTPApp, System.Math;
 
 {$R *.dfm}
 
@@ -108,6 +109,24 @@ begin
   if THorse.IsRunning then
     THorse.StopListen;
   FLock.Free;
+end;
+
+procedure GetAllDataAsStream(pRequest: TWebRequest; pStream: TStream);
+var
+  lContentLength: Integer;
+  lBufferRead: Integer;
+  lBuffer: array[0..1023] of Byte;
+begin
+  lContentLength := pRequest.ContentLength;
+  while (lContentLength > 0) do
+  begin
+    lBufferRead := pRequest.ReadClient(lBuffer[0], Min(lContentLength, SizeOf(lBuffer)));
+    if (lBufferRead < 1) then
+      Break;
+    pStream.WriteBuffer(lBuffer[0], lBufferRead);
+    Dec(lContentLength, lBufferRead);
+  end;
+  pStream.Position:= 0;
 end;
 
 procedure TfrmMain.btnServerStartClick(Sender: TObject);
@@ -270,6 +289,7 @@ end;
 
 procedure TfrmMain.PostBitmap(pReq: THorseRequest; pRes: THorseResponse);
 var
+  lBytes: TBytes;
   lBitmapStream: TBytesStream;
   lBase64Stream: TStream;
   lID: Integer;
@@ -277,7 +297,14 @@ begin
   lBase64Stream := nil;
 
   // IMAGE RECEIVED
+  {$IF CompilerVersion >= 30}
   lBitmapStream := TBytesStream.Create(pReq.RawWebRequest.RawContent);
+  {$ELSE}
+  Setlength(lBytes, pReq.RawWebRequest.ContentLength);
+  lBitmapStream := TBytesStream.Create(lBytes);
+  GetAllDataAsStream(pReq.RawWebRequest, lBitmapStream);
+  {$ENDIF}
+
   try
     // IMAGE TO BASE64
     lBitmapStream.Position := 0;
@@ -290,7 +317,6 @@ begin
 
     try
       FLock.Enter;
-
       // SAVE IMAGE IN BASE64
       TThread.Synchronize(nil, procedure
       begin
@@ -302,7 +328,6 @@ begin
 
     pRes.Send(IntToStr(lID)).Status(THTTPStatus.Created);
   finally
-    lBitmapStream.Free;
     lBase64Stream.Free;
   end;
 end;
