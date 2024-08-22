@@ -3219,7 +3219,6 @@ object frmMain: TfrmMain
       TextSettings.FontColor = claWhite
       TextSettings.HorzAlign = Center
       Text = 'Base64 to Bitmap / Bitmap to Base64'
-      TabOrder = 1
     end
   end
   object gbDatabase: TGroupBox
@@ -3252,16 +3251,14 @@ object frmMain: TfrmMain
     object grdDatabase: TGrid
       CanFocus = True
       ClipChildren = True
-      ControlType = Platform
       Position.X = 350.000000000000000000
       Position.Y = 27.000000000000000000
       Size.Width = 450.000000000000000000
       Size.Height = 160.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 35
+      RowHeight = 21.000000000000000000
       RowCount = 0
-      Options = [ColumnResize, ColumnMove, ColLines, RowLines, RowSelect, Tabs, Header, HeaderClick, AutoDisplacement]
-      OnCellDblClick = grdDatabaseCellDblClick
       Viewport.Width = 446.000000000000000000
       Viewport.Height = 135.000000000000000000
     end

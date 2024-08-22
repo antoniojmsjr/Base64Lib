@@ -5,16 +5,16 @@ interface
 uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs,
-  FMX.Controls.Presentation, FMX.StdCtrls, FMX.ScrollBox, FMX.Memo, FMX.Objects,
+  FMX.Controls.Presentation, FMX.StdCtrls, FMX.Memo, FMX.Objects,
   FMX.Layouts, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Error,
   FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def, FireDAC.Stan.Pool,
   FireDAC.Stan.Async, FireDAC.Phys, FireDAC.FMXUI.Wait, Data.DB,
   FireDAC.Comp.Client, FireDAC.Phys.SQLite, FireDAC.Phys.SQLiteDef,
   FireDAC.Stan.ExprFuncs, FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf,
-  FireDAC.DApt, FireDAC.Comp.DataSet, System.Rtti, FMX.Grid.Style, FMX.Grid,
+  FireDAC.DApt, FireDAC.Comp.DataSet, System.Rtti,
   Data.Bind.EngExt, Fmx.Bind.DBEngExt, Fmx.Bind.Grid, System.Bindings.Outputs,
   Fmx.Bind.Editors, Data.Bind.Components, Data.Bind.Grid, Data.Bind.Controls,
-  Fmx.Bind.Navigator, Data.Bind.DBScope;
+  Fmx.Bind.Navigator, Data.Bind.DBScope, FMX.Grid, FMX.Grid.Style, FMX.ScrollBox;
 
 type
   TfrmMain = class(TForm)
@@ -64,8 +64,6 @@ type
     procedure FDConnectionBeforeConnect(Sender: TObject);
     procedure btnDatabaseBitmapToBase64Click(Sender: TObject);
     procedure FDQueryCalcFields(DataSet: TDataSet);
-    procedure grdDatabaseCellDblClick(const Column: TColumn;
-      const Row: Integer);
   private
     { Private declarations }
     FLangID: string;
@@ -73,6 +71,8 @@ type
     function GetResourceStream(const pResourceName: string): TStream;
     procedure DownloadImagesFromResource;
     procedure DatabaseSaveBase64(const pBase64: string);
+    procedure _grdDatabaseDblClick(Sender: TObject);
+    procedure _grdDatabaseCellDblClick(const Column: TColumn; const Row: Integer);
   public
     { Public declarations }
   end;
@@ -150,6 +150,12 @@ begin
 
   FDConnection.Connected := True;
   FDQuery.Open();
+
+  {$IF CompilerVersion >= 30}
+  grdDatabase.OnCellDblClick := _grdDatabaseCellDblClick;
+  {$ELSE}
+  grdDatabase.OnDblClick := _grdDatabaseDblClick;
+  {$ENDIF}
 end;
 
 procedure TfrmMain.FormResize(Sender: TObject);
@@ -283,16 +289,27 @@ begin
   try
     lBitmap := lDecode.AsBitmap;
 
-    lRect := TRect.Create(TPoint.Zero);
+    lRect := TRect.Empty;
     lRect.Left := 0;
     lRect.Top := 0;
+    {$IF CompilerVersion >= 30}
     lRect.Width := lBitmap.Bounds.Width;
     lRect.Height := lBitmap.Bounds.Height;
+    {$ELSE}
+    lRect.Width := lBitmap.Width;
+    lRect.Height := lBitmap.Height;
+    {$ENDIF}
+
 
     imgFileBase64ToBitmap.MultiResBitmap.Clear;
     lItem := imgFileBase64ToBitmap.MultiResBitmap.ItemByScale(1, False, True);
+    {$IF CompilerVersion >= 30}
     lItem.Bitmap.Width := lBitmap.Bounds.Width;
     lItem.Bitmap.Height  := lBitmap.Bounds.Height;
+    {$ELSE}
+    lItem.Bitmap.Width := lBitmap.Width;
+    lItem.Bitmap.Height  := lBitmap.Height;
+    {$ENDIF}
     lItem.Bitmap.CopyFromBitmap(lBitmap, lRect, 0, 0);
   finally
     lBitmap.Free;
@@ -448,8 +465,39 @@ begin
   end;
 end;
 
-procedure TfrmMain.grdDatabaseCellDblClick(const Column: TColumn;
+procedure TfrmMain._grdDatabaseCellDblClick(const Column: TColumn;
   const Row: Integer);
+var
+  lBitmapStream: TStream;
+  lItem: TCustomBitmapItem;
+  lBase64: string;
+begin
+  lBase64 := FDQuery.FieldByName('BASE64').AsString;
+
+  if (lBase64 = '') then
+    Exit;
+
+  lBitmapStream := nil;
+  try
+    // DECODE
+    lBitmapStream := TBase64Lib
+      .Build
+        .Decode
+          .Text(lBase64).AsStream;
+
+    // SET BITMAP
+    imgDatabaseBase64ToBitmap.MultiResBitmap.Clear;
+    lItem := imgDatabaseBase64ToBitmap.MultiResBitmap.ItemByScale(1, False, True);
+    lItem.Bitmap.LoadFromStream(lBitmapStream);
+  finally
+    lBitmapStream.Free;
+  end;
+
+  // CHECK ENCODE/DECODE
+  // https://base64.guru/converter/encode/image
+end;
+
+procedure TfrmMain._grdDatabaseDblClick(Sender: TObject);
 var
   lBitmapStream: TStream;
   lItem: TCustomBitmapItem;
