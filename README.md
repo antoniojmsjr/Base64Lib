@@ -25,7 +25,7 @@ Para mais informações, consultar **[Wiki](https://github.com/antoniojmsjr/Base
 #### Recursos
 
 * Facilidade de Integração: Com uma interface amigável e documentação detalhada, a Base64Lib é fácil de integrar em qualquer projeto.
-* Flexibilidade: Base64Lib suporta diferentes tipos de dados, desde `string` até tipos complexos(`TBitmap`, `TStream`, `TBytes` e etc.), permitindo uma ampla gama de aplicações, desde comunicação entre sistemas até armazenamento.
+* Flexibilidade: Base64Lib suporta diferentes tipos de dados, desde `string` até tipos complexos(`TBitmap`, `TPicture`, `TStream`, `TBytes` e etc.), permitindo uma ampla gama de aplicações, desde comunicação entre sistemas até armazenamento.
 * Exemplos de uso: Repositório com diversos exemplos de uso da biblioteca, por exemplo, VCL, FMX e um servidor de aplicação em [Horse](https://github.com/HashLoad/horse).
 </br>
 
@@ -86,22 +86,23 @@ begin
 end;
 ```
 
-#### Bitmap >> Base64
+#### Image >> Base64
 ```delphi
 var
-  lBitmap: TBitmap;
   lEncode: IEncodeParse;
   lBase64: string;
   lBase64Size: Int64;
   lBase64MD5: string;
 begin
-  lBitmap := TBitmap(Timage.Picture.Graphic); //VCL
-  lBitmap := Timage.Bitmap; //FMX 
+  lEncode := TBase64Lib
+    .Build
+      .Encode
+        .Bitmap(Timage.Picture); // VCL
 
   lEncode := TBase64Lib
     .Build
       .Encode
-        .Bitmap(lBitmap);
+        .Bitmap(Timage.Bitmap); // FMX
 
   lBase64 := lEncode.AsString;
   lBase64Size := lEncode.Size;
