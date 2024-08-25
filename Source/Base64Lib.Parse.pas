@@ -53,7 +53,8 @@ type
   TDecodeParse = class(TParseCustom, IDecodeParse)
   private
     { private declarations }
-    function AsBitmap: TBitmap;
+    {$IF DEFINED(HAS_FMX)}function AsBitmap: TBitmap;{$ENDIF}
+    {$IF NOT DEFINED(HAS_FMX)}function AsPicture: TPicture;{$ENDIF}
   protected
     { protected declarations }
   public
@@ -164,40 +165,33 @@ end;
 {$ENDREGION}
 
 {$REGION 'TDecodeParse'}
+
+{$IF DEFINED(HAS_FMX)} // FMX
 function TDecodeParse.AsBitmap: TBitmap;
-{$IF NOT DEFINED(HAS_FMX)} // VCL
-var
-  lPicture: TPicture;
-  {$IF CompilerVersion < 30}
-  lWICImage: TWICImage;
-  {$ENDIF}
-{$ENDIF}
 begin
-  {$IF DEFINED(HAS_FMX)} // FMX
   FStream.Position := 0;
   Result := TBitmap.CreateFromStream(FStream);
-  {$ELSE} // VCL
-  lPicture := TPicture.Create;
-  try
-    FStream.Position := 0;
-    {$IF CompilerVersion >= 30}
-    lPicture.LoadFromStream(FStream);
-    {$ELSE}
-    lWICImage := TWICImage.Create;
-    try
-      lWICImage.LoadFromStream(FStream);
-      lPicture.Assign(lWICImage);
-    finally
-      lWICImage.Free;
-    end;
-    {$ENDIF}
-    Result := TBitmap.Create;
-    Result.Assign(lPicture.Graphic);
-  finally
-    lPicture.Free;
-  end;
-  {$ENDIF}
 end;
+{$ENDIF}
+
+{$IF NOT DEFINED(HAS_FMX)} // VCL
+function TDecodeParse.AsPicture: TPicture;
+var
+  lWICImage: TWICImage; //https://docwiki.embarcadero.com/Libraries/Athens/en/Vcl.Graphics.TWICImage
+begin
+  FStream.Position := 0;
+  Result := TPicture.Create;
+
+  lWICImage := TWICImage.Create;
+  try
+    lWICImage.LoadFromStream(FStream);
+    Result.Assign(lWICImage);
+  finally
+    lWICImage.Free;
+  end;
+end;
+{$ENDIF}
+
 {$ENDREGION}
 
 end.

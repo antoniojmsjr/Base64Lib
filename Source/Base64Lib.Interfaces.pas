@@ -61,17 +61,18 @@ type
 
   IDecodeParse = interface(IParse)
     ['{59D33757-E67D-443B-87A8-9576A359DBF1}']
-    function AsBitmap: TBitmap;
+    {$IF DEFINED(HAS_FMX)}function AsBitmap: TBitmap;{$ENDIF}
+    {$IF NOT DEFINED(HAS_FMX)}function AsPicture: TPicture;{$ENDIF}
   end;
 
   IBase64LibEncode = interface
     ['{CA3C82F8-AFA2-4B26-9B35-EB5B048A4F2F}']
     function Bytes(const Value: TBytes): IEncodeParse;
     function Text(const Value: string): IEncodeParse;
-    function Stream(Value: TStream; const OwnsObject: Boolean = True): IEncodeParse;
+    function Stream(const Value: TStream; const OwnsObject: Boolean = True): IEncodeParse;
     function &File(const FileName: TFileName): IEncodeParse;
-    function Bitmap(Value: TBitmap): IEncodeParse; overload;
-    {$IF NOT DEFINED(HAS_FMX)}function Bitmap(Value: TGraphic): IEncodeParse; overload;{$ENDIF}
+    {$IF DEFINED(HAS_FMX)}function Image(const Value: TBitmap): IEncodeParse;{$ENDIF}
+    {$IF NOT DEFINED(HAS_FMX)}function Image(const Value: TPicture): IEncodeParse;{$ENDIF}
   end;
 
   IBase64LibDecode = interface

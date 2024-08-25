@@ -38,7 +38,7 @@ type
     { protected declarations }
     function Encode(const pInput: TBytes): TBytes; overload;
     function Encode(const pInput: string): TBytes; overload;
-    function Encode(pInput: TStream): TBytes; overload;
+    function Encode(const pInput: TStream): TBytes; overload;
     function EncodeFile(const pInput: TFileName): TBytes;
   public
     { public declarations }
@@ -49,10 +49,10 @@ type
     { private declarations }
     function Bytes(const pValue: TBytes): IEncodeParse;
     function Text(const pValue: string): IEncodeParse; overload;
-    function Stream(pValue: TStream; const pOwnsObject: Boolean = True): IEncodeParse;
+    function Stream(const pValue: TStream; const pOwnsObject: Boolean = True): IEncodeParse;
     function &File(const pFileName: TFileName): IEncodeParse;
-    function Bitmap(pValue: TBitmap): IEncodeParse; overload;
-    {$IF NOT DEFINED(HAS_FMX)}function Bitmap(pValue: TGraphic): IEncodeParse; overload;{$ENDIF}
+    {$IF DEFINED(HAS_FMX)}function Image(const pValue: TBitmap): IEncodeParse;{$ENDIF}
+    {$IF NOT DEFINED(HAS_FMX)}function Image(const pValue: TPicture): IEncodeParse;{$ENDIF}
   protected
     { protected declarations }
   public
@@ -66,7 +66,7 @@ uses
   System.NetEncoding, Base64Lib.Types, Base64Lib.Parse;
 
 {$REGION 'TBase64LibEncodeCustom'}
-function TBase64LibEncodeCustom.Encode(pInput: TStream): TBytes;
+function TBase64LibEncodeCustom.Encode(const pInput: TStream): TBytes;
 var
   lEncoded: TBytesStream;
   lBase64Encoding: TBase64Encoding;
@@ -198,41 +198,6 @@ end;
 {$ENDREGION}
 
 {$REGION 'TBase64LibEncode'}
-function TBase64LibEncode.Bitmap(pValue: TBitmap): IEncodeParse;
-var
-  lBitmapStream: TMemoryStream;
-  lEncoded: TBytes;
-begin
-  if (pValue = nil) then
-    Exit;
-
-  lBitmapStream := TMemoryStream.Create;
-  try
-    pValue.SaveToStream(lBitmapStream);
-
-    // ENCODE
-    lEncoded := Encode(lBitmapStream);
-    Result := TEncodeParse.Create(lEncoded);
-  finally
-    lBitmapStream.Free;
-  end;
-end;
-
-{$IF NOT DEFINED(HAS_FMX)}
-function TBase64LibEncode.Bitmap(pValue: TGraphic): IEncodeParse;
-var
-  lBitmap: TBitmap;
-begin
-  if (pValue = nil) then
-    Exit;
-
-  lBitmap := TBitmap(pValue);
-
-  // ENCODE
-  Result := Bitmap(lBitmap);
-end;
-{$ENDIF}
-
 function TBase64LibEncode.Bytes(const pValue: TBytes): IEncodeParse;
 var
   lEncoded: TBytes;
@@ -257,7 +222,52 @@ begin
   Result := TEncodeParse.Create(lEncoded);
 end;
 
-function TBase64LibEncode.Stream(pValue: TStream; const pOwnsObject: Boolean): IEncodeParse;
+{$IF NOT DEFINED(HAS_FMX)}
+function TBase64LibEncode.Image(const pValue: TPicture): IEncodeParse;
+var
+  lImageStream: TStream;
+  lEncoded: TBytes;
+begin
+  Result := nil;
+  if (pValue = nil) or (pValue.Graphic = nil) then
+    Exit;
+
+  lImageStream := TMemoryStream.Create;
+  try
+    pValue.Graphic.SaveToStream(lImageStream);
+
+    // ENCODE
+    lEncoded := Encode(lImageStream);
+    Result := TEncodeParse.Create(lEncoded);
+  finally
+    lImageStream.Free;
+  end;
+end;
+{$ENDIF}
+
+{$IF DEFINED(HAS_FMX)}
+function TBase64LibEncode.Image(const pValue: TBitmap): IEncodeParse;
+var
+  lImageStream: TStream;
+  lEncoded: TBytes;
+begin
+  if (pValue = nil) then
+    Exit;
+
+  lImageStream := TMemoryStream.Create;
+  try
+    pValue.SaveToStream(lImageStream);
+
+    // ENCODE
+    lEncoded := Encode(lImageStream);
+    Result := TEncodeParse.Create(lEncoded);
+  finally
+    lImageStream.Free;
+  end;
+end;
+{$ENDIF}
+
+function TBase64LibEncode.Stream(const pValue: TStream; const pOwnsObject: Boolean): IEncodeParse;
 var
   lEncoded: TBytes;
 begin
