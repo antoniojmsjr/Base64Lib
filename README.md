@@ -60,7 +60,7 @@ Os exemplos estão disponíveis na pasta do projeto:
 ..\Base64Lib\Samples
 ```
 
-### [Codificação](https://github.com/antoniojmsjr/Base64Lib/wiki/Encode)
+### [Codificação](https://github.com/antoniojmsjr/Base64Lib/wiki/Codifica%C3%A7%C3%A3o)
 
 ```delphi
 Uses
@@ -109,7 +109,7 @@ begin
   lBase64MD5 := lEncode.MD5;
 ```
 
-### [Decodificação](https://github.com/antoniojmsjr/Base64Lib/wiki/Decode)
+### [Decodificação](https://github.com/antoniojmsjr/Base64Lib/wiki/Decodifica%C3%A7%C3%A3o)
 
 #### Base64 >> Text
 ```delphi
