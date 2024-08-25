@@ -66,7 +66,7 @@ Os exemplos estão disponíveis na pasta do projeto:
 Uses
   Base64Lib;
 ```
-#### Texto >> Base64
+#### Text >> Base64
 
 ```delphi
 var
@@ -111,7 +111,7 @@ begin
 
 ### [Decodificação](https://github.com/antoniojmsjr/Base64Lib/wiki/Decode)
 
-#### Base64 >> Texto
+#### Base64 >> Text
 ```delphi
 var
   lDecode: IDecodeParse;
