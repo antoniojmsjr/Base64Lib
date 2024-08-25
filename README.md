@@ -134,12 +134,43 @@ end;
 ```
 
 #### Base64 >> Image
+
+#### VCL
+
+```delphi
+var
+  lDecode: IDecodeParse;
+  lPicture: TPicture;
+  lSize: Int64;
+  lMD5: string;
+begin
+  lDecode := TBase64Lib
+    .Build
+      .Decode
+        .Text('QmFzZTY0TGli');
+
+  if not Assigned(lDecode) then
+    Exit;
+
+  lPicture := lDecode.AsPicture;
+  try   
+    TImage1.Picture.Assign(nil);
+    TImage1.Picture.Assign(lPicture);
+  finally
+    lPicture.Free;
+  end;
+
+  lSize := lDecode.Size;
+  lMD5 := lDecode.MD5;
+end;
+```
+
+#### FMX
 ```delphi
 var
   lDecode: IDecodeParse;
   lBitmapStream: TStream;
   lBitmap: TBitmap;
-  lPicture: TPicture;
   lItem: TCustomBitmapItem; // FMX - Unit FMX.MultiResBitmap
   lRect: TRect; // FMX
   lSize: Int64;
@@ -152,31 +183,17 @@ begin
 
   if not Assigned(lDecode) then
     Exit;
-  
-  // VCL
-  lPicture := nil;
-  try
-    lPicture := lDecode.AsPicture;
-    
-    TImage.Picture.Assign(nil);
-    TImage.Picture.Assign(lPicture);
-  finally
-    lPicture.Free;
-  end;
 
-  // FMX
-  lBitmap := nil;
+  lBitmap := lDecode.AsBitmap;
   try
-    lBitmap := lDecode.AsBitmap;
-
     lRect := TRect.Create(TPoint.Zero);
     lRect.Left := 0;
     lRect.Top := 0;
     lRect.Width := lBitmap.Bounds.Width;
     lRect.Height := lBitmap.Bounds.Height;
 
-    imgFileBase64ToBitmap.MultiResBitmap.Clear;
-    lItem := imgFileBase64ToBitmap.MultiResBitmap.ItemByScale(1, False, True);
+    TImage1.MultiResBitmap.Clear;
+    lItem := TImage1.MultiResBitmap.ItemByScale(1, False, True);
     lItem.Bitmap.Width := lBitmap.Bounds.Width;
     lItem.Bitmap.Height  := lBitmap.Bounds.Height;
     lItem.Bitmap.CopyFromBitmap(lBitmap, lRect, 0, 0);
@@ -186,13 +203,10 @@ begin
 
   OU
 
-  // FMX
-  lBitmapStream := nil;
+  lBitmapStream := lDecode.AsStream;
   try
-    lBitmapStream := lDecode.AsStream;
-
-    imgFileBase64ToBitmap.MultiResBitmap.Clear;
-    lItem := imgFileBase64ToBitmap.MultiResBitmap.ItemByScale(1, False, True);
+    TImage1.MultiResBitmap.Clear;
+    lItem := TImage1.MultiResBitmap.ItemByScale(1, False, True);
     lItem.Bitmap.LoadFromStream(lBitmapStream);
   finally
     lBitmapStream.Free;
