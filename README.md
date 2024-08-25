@@ -133,12 +133,13 @@ begin
 end;
 ```
 
-#### Base64 >> Bitmap
+#### Base64 >> Image
 ```delphi
 var
   lDecode: IDecodeParse;
   lBitmapStream: TStream;
   lBitmap: TBitmap;
+  lPicture: TPicture;
   lItem: TCustomBitmapItem; // FMX - Unit FMX.MultiResBitmap
   lRect: TRect; // FMX
   lSize: Int64;
@@ -153,14 +154,14 @@ begin
     Exit;
   
   // VCL
-  lBitmap := nil;
+  lPicture := nil;
   try
-    lBitmap := lDecode.AsBitmap;
+    lPicture := lDecode.AsPicture;
     
     TImage.Picture.Assign(nil);
-    TImage.Picture.Assign(lBitmap);
+    TImage.Picture.Assign(lPicture);
   finally
-    lBitmap.Free;
+    lPicture.Free;
   end;
 
   // FMX
