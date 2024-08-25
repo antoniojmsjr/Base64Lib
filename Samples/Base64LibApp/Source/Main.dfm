@@ -27,6 +27,13 @@ object frmBase64LibApp: TfrmBase64LibApp
     ExplicitTop = 90
     ExplicitWidth = 799
   end
+  object Label2: TLabel
+    Left = 232
+    Top = 176
+    Width = 31
+    Height = 13
+    Caption = 'Label2'
+  end
   object pnlHeader: TPanel
     Left = 0
     Top = 0
@@ -233,7 +240,7 @@ object frmBase64LibApp: TfrmBase64LibApp
         ACCD187FF56FA5CA8786C2923293F5BEFE2DD9C700D5F7F2FF752D384B388C18
         450000000049454E44AE426082}
       ExplicitLeft = -3
-      ExplicitTop = -3
+      ExplicitTop = 3
     end
     object pnlHeaderApp: TPanel
       Left = 594
@@ -322,7 +329,7 @@ object frmBase64LibApp: TfrmBase64LibApp
     Top = 159
     Width = 814
     Height = 501
-    ActivePage = tbsTextBase64
+    ActivePage = tbsBitmapBase64
     Align = alClient
     Style = tsFlatButtons
     TabHeight = 25
@@ -607,7 +614,7 @@ object frmBase64LibApp: TfrmBase64LibApp
       end
     end
     object tbsBitmapBase64: TTabSheet
-      Caption = 'Bitmap <-- --> Base64'
+      Caption = 'Image <-- --> Base64'
       ImageIndex = 1
       object bvlBitmapBase64: TBevel
         AlignWithMargins = True
@@ -638,7 +645,7 @@ object frmBase64LibApp: TfrmBase64LibApp
           Height = 20
           Align = alTop
           AutoSize = False
-          Caption = ' Bitmap'
+          Caption = ' Image'
           Transparent = False
           ExplicitTop = 0
         end
@@ -830,6 +837,14 @@ object frmBase64LibApp: TfrmBase64LibApp
             C02FE91369D404EA494F57424E2AAAF97CC7E1FE0F8BBE4725A950A492000000
             0049454E44AE426082}
           Transparent = True
+          ExplicitLeft = -13
+        end
+        object lblBitmapBase64InputBitmapType: TLabel
+          Left = 3
+          Top = 171
+          Width = 12
+          Height = 13
+          Caption = '...'
         end
         object btnBitmapBase64Encode: TButton
           AlignWithMargins = True
@@ -842,7 +857,7 @@ object frmBase64LibApp: TfrmBase64LibApp
           Margins.Right = 50
           Margins.Bottom = 10
           Align = alTop
-          Caption = 'Bitmap >> Base64'
+          Caption = 'Image >> Base64'
           TabOrder = 0
           OnClick = btnBitmapBase64EncodeClick
         end
@@ -939,7 +954,7 @@ object frmBase64LibApp: TfrmBase64LibApp
           Height = 20
           Align = alTop
           AutoSize = False
-          Caption = ' Bitmap'
+          Caption = ' Image'
           Transparent = False
           ExplicitLeft = 6
           ExplicitTop = 253
@@ -955,6 +970,13 @@ object frmBase64LibApp: TfrmBase64LibApp
           ExplicitTop = 290
           ExplicitWidth = 402
           ExplicitHeight = 149
+        end
+        object lblBitmapBase64OutputBitmapType: TLabel
+          Left = 3
+          Top = 425
+          Width = 12
+          Height = 13
+          Caption = '...'
         end
         object mmoBitmapBase64InputBase64: TMemo
           AlignWithMargins = True
@@ -980,7 +1002,7 @@ object frmBase64LibApp: TfrmBase64LibApp
           Margins.Right = 50
           Margins.Bottom = 10
           Align = alTop
-          Caption = 'Base64 >> Bitmap'
+          Caption = 'Base64 >> Image'
           TabOrder = 1
           OnClick = btnBitmapBase64DecodeClick
         end
@@ -1034,10 +1056,6 @@ object frmBase64LibApp: TfrmBase64LibApp
     object tbsFileBase64: TTabSheet
       Caption = 'File <-- --> Base64'
       ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object bvlFileBase64: TBevel
         AlignWithMargins = True
         Left = 403
@@ -1173,11 +1191,12 @@ object frmBase64LibApp: TfrmBase64LibApp
             AlignWithMargins = True
             Left = 5
             Top = 142
-            Width = 12
+            Width = 390
             Height = 13
             Align = alBottom
             Caption = '...'
             WordWrap = True
+            ExplicitWidth = 12
           end
           object btnFileBase64InputFile: TButton
             Left = 50
@@ -1326,6 +1345,312 @@ object frmBase64LibApp: TfrmBase64LibApp
         end
       end
     end
+    object tbsDetectImage: TTabSheet
+      Caption = 'Detect Image'
+      ImageIndex = 3
+      object pnlDetectImage: TPanel
+        Left = 0
+        Top = 0
+        Width = 353
+        Height = 466
+        Align = alLeft
+        BevelOuter = bvNone
+        Caption = 'pnlDetectImage'
+        ShowCaption = False
+        TabOrder = 0
+        object pnlDetectImageHeader: TPanel
+          Left = 0
+          Top = 0
+          Width = 353
+          Height = 64
+          Align = alTop
+          BevelOuter = bvNone
+          Caption = 'pnlDetectImageHeader'
+          ShowCaption = False
+          TabOrder = 0
+          object lblDetectImageType: TLabel
+            AlignWithMargins = True
+            Left = 3
+            Top = 39
+            Width = 347
+            Height = 20
+            Align = alBottom
+            AutoSize = False
+            Caption = ' Type'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+            ParentFont = False
+            Transparent = False
+            ExplicitLeft = 0
+            ExplicitTop = 4
+            ExplicitWidth = 345
+          end
+          object bvlDetectImageHeader: TBevel
+            Left = 0
+            Top = 62
+            Width = 353
+            Height = 2
+            Align = alBottom
+            ExplicitLeft = 1
+            ExplicitTop = 13
+            ExplicitWidth = 349
+          end
+          object btnDetectImageLoadFile: TButton
+            AlignWithMargins = True
+            Left = 3
+            Top = 3
+            Width = 347
+            Height = 30
+            Align = alClient
+            Caption = 'Load File'
+            TabOrder = 0
+            OnClick = btnDetectImageLoadFileClick
+          end
+        end
+        object pnlDetectImageClient: TPanel
+          Left = 0
+          Top = 64
+          Width = 353
+          Height = 402
+          Align = alClient
+          BevelOuter = bvNone
+          Caption = 'pnlDetectImageClient'
+          ShowCaption = False
+          TabOrder = 1
+          object imgDetectImage: TImage
+            AlignWithMargins = True
+            Left = 3
+            Top = 3
+            Width = 347
+            Height = 396
+            Align = alClient
+            Center = True
+            ExplicitLeft = 0
+            ExplicitTop = 1
+            ExplicitWidth = 353
+            ExplicitHeight = 402
+          end
+        end
+      end
+      object pnlDetectImageBase64: TPanel
+        Left = 353
+        Top = 0
+        Width = 453
+        Height = 466
+        Align = alClient
+        BevelOuter = bvNone
+        Caption = 'pnlBitmapBase64Right'
+        ShowCaption = False
+        TabOrder = 1
+        object lblDetectImageBase64Input: TLabel
+          AlignWithMargins = True
+          Left = 3
+          Top = 3
+          Width = 447
+          Height = 20
+          Align = alTop
+          AutoSize = False
+          Caption = ' Base64'
+          Transparent = False
+          ExplicitLeft = 6
+          ExplicitTop = 11
+          ExplicitWidth = 391
+        end
+        object lblDetectImageBase64Output: TLabel
+          AlignWithMargins = True
+          Left = 3
+          Top = 245
+          Width = 447
+          Height = 20
+          Align = alTop
+          AutoSize = False
+          Caption = ' Bitmap'
+          Transparent = False
+          ExplicitLeft = 6
+          ExplicitTop = 253
+          ExplicitWidth = 391
+        end
+        object imgDetectImageBase64Output: TImage
+          Left = 0
+          Top = 268
+          Width = 453
+          Height = 172
+          Align = alClient
+          Center = True
+          ExplicitLeft = 3
+          ExplicitTop = 265
+        end
+        object lblDetectImageBase64OutputType: TLabel
+          AlignWithMargins = True
+          Left = 3
+          Top = 443
+          Width = 447
+          Height = 20
+          Align = alBottom
+          AutoSize = False
+          Caption = ' Type'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = False
+          ExplicitLeft = 6
+          ExplicitTop = 183
+        end
+        object mmoDetectImageBase64Input: TMemo
+          AlignWithMargins = True
+          Left = 3
+          Top = 29
+          Width = 447
+          Height = 155
+          Align = alTop
+          BorderStyle = bsNone
+          Lines.Strings = (
+            
+              'iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAMAAABHPGVmAAABXFBMVEVHcEzUIzLT' +
+              'JDTSIzN4ERvDJzXLJzakIy+BLjXRJTR7EBqZDBvbIDKNCxfrITLuJDKADRiGCxbv' +
+              'JDSWDBrqITKYDBqADhuJCxTjHi6UCxrsIjDsIjOHCxeVDBrMJTOOChbqIjLnIDCT' +
+              'CRmXCxvmITHpHS/eIzLpIDHvJDaMCxjbITPdIDCHDRmJCxfkIjLbHjCCDhqSCRmF' +
+              'CxmJDBfuITGLCRPTIzKKDBaRChfcIC/ZHy7ZJDPgIDHgIC+NCRiOCheJChbVIjDa' +
+              'ITKRCBWUBxPXIjLiIzDjJTOFDBiVCBTOHi+yEySGCxeuEB6uKTmeECD0JzadDyCg' +
+              'Dh+fDx+bECDzJzaeDx3yKDb1JzSiDR/2JTb1JjeeDyH3JjSgDhucEBz0JzKhDiH0' +
+              'JznyKDT2JTn4JTTvKDWfDyGZEB3xJzj5JDjyJTOkDB6cDRr1IzT2IzGpEB7WHzDl' +
+              'JTi7FCOXpVk3AAAAT3RSTlMAOEIwDg4VBwMnF/mNldX+NUPv4d/0H1OU2vTlPO0d' +
+              'i+2wxujMoITF+YFgdWNr27kooi2tusNSS9CfSVqvwHS8oW9otLitfOpbqte3eN47' +
+              'RamV3wAAEqNJREFUeNqtWot3U1W6//bZ55mTd9o0pWlKCwVaisWKvCogD3mIoo4z' +
+              '17njuOYu/7HrXXPHqzPqLLk4IIKFSsujAsUCRVCBtLShTdK8TnLe5+6TV5M2Lei6' +
+              'Z61mNSfJ9zv7e/6+b28Ez3XxpvGSpOrsLB3sB/+neqtKd6auY0p+rl+j5/gOo++f' +
+              'onLWWwxEgaEATA3aMMwNI6fZPkRr/w8gjLEezRu/NwBw6bGl4qsIAkHjPva1P/0J' +
+              'PwtndRAedfnvvKdBGhjgubhWlF6G8XOgsWm3wn26mb5iyb8VhFNbdO29nOnGaW+a' +
+              'A0iW11BEYdwAKi8JUAAP/IN+ysm/BYRXWvhBjlNMoigi1aBAsWUDaCUoC5sipBUv'
+            
+              'SC5QrFF5FZgVQQTseTvun3VpPo1NaSUEKNpdKWJIrUmFAUppMiUEYo4WH48YhV8H' +
+              'wuz5/gNtQWM0XuZERSILqBqXcYFkYhBxmriZyClc0tZdIgD8X8MPtF8Bgg9M7THx' +
+              'nCPfyFIeyW3oClEOUoE8ROmuaOW9xlj7t8bzgnDr5t5LAKygYkaURfKZqolCHkwx' +
+              'UVYjLVggiWP6z8pzgbBs+EgaZzTOYyQaofiTDGsR8QA5Z/ULvOUHFSBxb1pVnwNE' +
+              'CCX/NCtyHMy6INtonX6kUrDgljAHxK9nSxiM3KRQea8aH/LHCs8EQeuOpASGuBAX' +
+              'xw01xgdoXTuFQOGgEBw0UqW7XsnDzvt0Ku5lv/3ZegYI1bcz41fwHBFmNJUfs6R1' +
+              '0ERVA+a832DCinWZJ7Fo7nJ+v5d8FsjRhqWsybMGWJBdM3TbXBVkd24jsJYAkkxC' +
+              'QaX8WsHgVciDyGND9X+9yeH8WK1NvYfXKaAMdeB7v4OcOM/Rul/JM0wscXUVEKqv' +
+              'S5SgJir8kAxgnFGbkMb+1eE6lBmJ1j6l0N1L8G/cAKrT//B4Rsy5IM75BfTR+qsr' +
+              'gqAtfUiqee8ChlMUjjJpGHa6f4puOJj5X2+0xjz0h1EvXHpiW5rT18X+qMrY4r1I' +
+              'kc7g6RVAhMiLTJ0/eYGCLAYej3DcTQ349pdhbKpGWWjN6xn/l+Frld93TX1ggoCm' +
+              'SE6bUW80BGHb9pHoqAUhBrVYkE83s8V8wXZuFx4MLX7MDWzUVN/H+iKs0N65Gc2T' +
+              'ZObKpkbzDUA4Br8jQalklHXmQDpyzY+JcklFgn/Plcc17klFDlrCuUKN/kjqfp3H' +
+              'oBMNtH6kKstBelPHCnmOlNZFkDUzwQw1NVIxNRUavBldjGfu5fUUfLtmtN4/6d2T' +
+              'ryBOA+1c5+1lIHhzv8FLdv0uSVBcWT+VdY6kklWx+7fIJ2OL4rZPv8oL30SXBKwD' +
+              'm0dJpaGS+GIlUKsgzKudQtwdL/uuKJiK4dYpC198uPjozrdO9Y1U3zG9L0ruWz8s'
+            
+              'yVRbA92FgoEINTBdP9zS60F6zUHJB+mysUTCEuKBDLjhH3JVCrdm94XYYiofTAzk' +
+              'x2aXxLZv4wbQFAo0fwbB6a6JOhCBeUOQ3VUQniQ/RKUmNjX/C1ftyvLvj92qeh/b' +
+              'uRWN4zt1ELxH/0NBVXVS2NKWyTAXWsZrQHj637NigSdZtyTExZKX3OkQteebp9Wc' +
+              'ikNHLt2vCtx/4x3x1tU6j+d2PNxlAiljFIhswpXk+H9q8iIIWnOAxIOF3MlyKfcZ' +
+              'lHEyyYnvfLPos7uT4K7EHURS7xtX7tTVQWLyd3MeVhITFOgGwyjBwiVlugrC+U6k' +
+              'adUtgaPEeqAV1MLFjlGmd8PI2tHFZ2ccVd0d7l64sOnbWozgSw6LIlkYLI+GSRAE' +
+              '4jqnP7yrVEDQYQEc+YBU9cYmhT3vuEv86VjrubuVm6F3b41V4kvoHvD8K1pbab3+' +
+              '1xN5QpgoBXNYJvTGBFpnrlrTZRCe/kuqNi8SEPR3w84WvYf0ixXbclt2XKj8z9N/' +
+              'Ur/QaivgjuguhIqiay7K5E7bVrFBBPGNVB0G41uIXbVdFx9a/+Bs1QrOWEUEDr31' +
+              'Sc9iyAC3Ib9dI9RYrgdxFdBQ+3gJhDiKXB+3TadnivZmI0f+K1e+h3x6Jc3zLw7A' +
+              '5wuLyqK7o8dNoER5CQhNxM8NF0GYnT26Uqcu8Xo5APj2Y6cruX37j72XgbOwakJP' +
+              'e/iiupgXg2333wXZ0CsUtnphhJirUd0GoSJb/ZJZ+zF3bbr8dvN094RScS5h3a2t' +
+              'xXrjTscd3CRdzgUDrnbDCGYkVqE0Wq9biTvLnNMXbJANry14ZvlafQWiw2XJu5PW' +
+              'LyW8CH7zox2PvWPtMQsQVjZF17lvErl2JtlYsDsUo03KWlAPYlEiXHhMQJiuF0Bz' +
+              'mCWQAMgcl+G+rVTySF4tJq+ISw8m79E1Psub26z55qt44+wbIBnYwHaoL1kJRqYb' +
+              'vovqCFDHQUJuKjYJ6lQ+78+Ol2OA2/KIBCDXz2WcY8uYIa8Je9G1/WCYDC83YKeA'
+            
+              'HZB3DmVTCA5cP47EhbINHDw36zp/TLpSWcqGzuFCRHW2j6jk2a1lpP2ENnzMJROL' +
+              'S3oDENrEptMxMoH49sNWWkyXH4RxSc5p9frr7okbpTuDzrNUn+sySVKRreNzyxkl' +
+              '1504miS9XkNGCxQByS5cQWznK4hRK8Q5wCY9d8f65w59kSotBftoZ4xwaE7bdrNx' +
+              '8+Ht74mDiRqthAJsgjERQzh01OKqdNQla21Dd/nIQf1CySpsJN93UYHIuvy4Ao0v' +
+              'x8ZXPnnh/kAjEMpESL+dQNunDwtKsuLBAUv5WioAu33gZCnHoy2hYRkG7udNWOly' +
+              '4M0PLby9EQhClsFcpNBhnyBk+ArfYqiWYojjzTuLVol03NQUQDuvWCtB8MILN9aN' +
+              '04MBaI7R+jIQ0BnxGuo+lqhJKX7tZFsxtw8+ZImD8d7111Sgdo+uuA5Hh7PwQCH9' +
+              'yTs4CXhJM0dCMUtbzgnU+WYtCIPPScUMzjEfjt1QticfGoD7uGsrYYQ3GpkiH30j' +
+              '/BQbvGIsAwFMJ9G2sFibHNecLdM3tif9mNlBD0HEp99ZAYLeXZAnSypqyR1iGoAQ' +
+              'x8b092h9X7FZqNhEuzetlP7HPh9L39U43/qrK8xOvOvg50oh8pK2QmCS1JKiZcuh' +
+              'zyP/QRYkhir7p8hLp3uvl9Yy+CN0XYPB7ERjo9M9fMuZqqWDeBc4xISxHIS2POjD' +
+              'rCYugnhTjNb2r1Jryb9IX9HYzie5hhgDbuuHhRrIwRZgGUlrsBJA6D27klRBYLhr' +
+              '5hieHLV1y+3Vh+BA/EGjYQbXLczN144S+J4XCqwYr/fhRZDSXKasdv9n3vanB6xP' +
+              'c6bdE0ULTFc61gBjq9eSb9Unso4TUaCbpGw9COnBdQ/Y6lq8y4i3b2mRZNPxT4k1' +
+              'ev1jym7XN8tDhNufmCvMLbl59Ls/x7z1fMReCUfKWDPy762dzrguzZDIUjte/5'
+            
+              '+to/Sa++Ck5GVlJFjYFE0vy8dh5Y1k62x9zJfV5UHuN0lIV3MfM17kDcyeeNwpcN' +
+              'eYLnNqiTjeE7knLF2GrcGpE2lXFuoCpRQn3Fm0bUOeA5MtBSTjq3Q5wtZZLWYI4s' +
+              'DZelmO5qCdRpZfdGRf2iUtcWERSGPrvETSSrQRCHCDUTWKfLUUjlw7eJS5AY0ufj' +
+              '9Lgx6KNQCZQd0v50nvVrkd+Xv1W+jQRXX3o7W1LaGjQxEnG1QnzqOGs7lXGNL4J+' +
+              'ttEpojSBNocy+4JNZZHqN0LLJo6uAFbfejWM36wxtTP6eWyWf7JtdLT5KHIRijln' +
+              'giVexQuQlStPb6kixTfgTHaJi9bCqLIDUr2YHY0dpl0H7Wm117X99HWkTaaFh+ES' +
+              'fjwBcUKb/7CLVzlEBEIev8jNmUfGjJRF0XNCrkrXYOsCVwYVG+Fn40cJ8+UCB8Cz' +
+              'RRJEEYahC12JME/3CCEIkeB2atMhluYpFGGOyn3dTUk13XVBwSFxu4cIvdzdJ9j4' +
+              'n829QftaQBTiEZTKhYoVYoarhZyvovxggl2k9450LZvbwnWzXhIW38BwxlE1qB5Q' +
+              'MzVadwhCR1S9Z9m3o3abiBBVWUNJln2DksQqExy6AFUI3EFQS9T45RQoUS8QvnDK' +
+              '5lqicZfsTC2lG+NbE4FeL65uDtDKgYxBhhVMSVZJ7cZomqOGgIwhmIV/2E3JFGx0' +
+              'sblbBu/o4qGYGhlQ7HHdi8sGh5XmhLbRne4lOvvCsRDk14bykf0VZzDBpf/qzBXL' +
+              'ZpKrNzDWapsnfxwTNVIwyaNxTUIdcJ8K3XJg3h/XhAymKDMUxah1Uu0jqI1iWbcN' +
+              'utAyvESzkyIF2tGkHYsBBluhJSbT2hX5l8SjT9/rxbViwMxElgFZiQJDvQtcliE+' +
+              'Q9Zoi5omjSv38pVTzFfDU/ApuPfF1HI1p6LukE5XfCLE3aaYMBw1wFZM50lJsgZu' +
+              'fGAl+2fABGnD74KVB8M9s5pgiHYGq8din99FXy2pbfBwYPfGa1hdhFSx8vtXOkUd'
+            
+              'tfmcq7NBerLfA8+99//ioZwL+YfMuJk09rs/1R+bJit7upbYjwQ4tVV0FxFaB5+l' +
+              'S5xe7uqnAvRuNFDMNZZ7p3iKF2yTeUgccOq3ZoSfc/Lb5toXZbVFN81Z2mUNx5qt' +
+              'Ji8/RfCqQIi0VHbk2fMvuvUMUNLPa1759Cj8eqm7/2ZUsr83aH22aMlRFo8mcF/1' +
+              'YZFgBa86oEHHJlDQ/k+B9vVtVztDA5R/vr66CjxypVlOCWNpDNhkshAYQ9kPbAue' +
+              'rYg/Dqf5ujeDptgotS2LHK8IfnO+9T1XElBwZGNvwWfbJ0J9jTk8dsw0Ck7AiiQL' +
+              'yzOMAhSzkqOQl8wR1neO58KR4HEvRL+FxogsjfrGZ7VdvMl8K041HfRHltW/mIqD' +
+              'Xq4zAYJO8Adb1mFGUPZIxEE7ApzY1A+dIezQhr545DDpxDm894d42Hzft+B0xvcO' +
+              'anaTb20nBZmM//YkN12SBAuZ1lx6yOB99iJWdalBkGzH/uOBtxdXRleXtbwBrRg3' +
+              'PptfCILCRHW9gZZqIdP1TI497+mRVcmFBguX48WBx04rmgYTApN2R+DP3yppUUQH' +
+              'LGGTY3/NJwx3S44wqbM0r22Xu9OvKl9wUa5V9iEpIOzi0ZdALz6nqVk0k6Vt0syr' +
+              'pZK+qQGKw61Tz38+3XZo3JGllBvGGk8vw+50CIMGB6KQkmNbF1bOnIlnSJL1NWVo' +
+              'GgkRAhaM2wEqYMTFLCGafVbtXToJ6o82n5X545xPMpzNS3P4Tl+aXzy4bPtsIGEC' +
+              'GTxPH9HmvKIo05RTUlQPwu1hU+U6+NgcdbL+oVNw/szRrYsupAaEE2v24wRidd4g' +
+              'ezAbyA5VbeIpFcFOIq6JFb94JLKSPP8HqlN+F6dxQKpkHV6YtTXPiLRhsCpHnfKB' +
+              'kaEIzHYrbIPRijbXa05ZG6bE+z5cjE3YqIHb8ck02+UA+i08mGWxvEj9sOw4y9Dr' +
+              'FUJ2nLJcHXmr7MSbldkZFEReGOFyJ8zlETkoS6hBaiK2zS2OOHbeAhunJn9CKGRx'
+            
+              'K+rUvBVZc6Dn/TKhmuYwBx+XpSxIysuN1kb5wdtB57QTLteofBIbnmv2E3zbU9Ak' +
+              'KAgtPlQKH7Iya+2FF51JbcYQbq6cqlVTbOgB8I0EHIkDTFS6SCA8Ukktx8xtauA9' +
+              'x5oTPp+lFR914/FEgYE+U0CWG0jRFS9kyIcrPzNPgSQ/RTWBmkOES2STKEVEiTRI' +
+              'KwQahfUXmg0yLILdpXbQ/2uzIIRoxymuzZhDjiMEBZyIRgHPB3kfptxuXbsuFwmL' +
+              'iumOBZiNGlDr46y6LdaYRI6iOEy6DW3CqlSZ9/u0IaLMr0y/nWOOkFo9NLzbh8g3' +
+              'nA71fscrBsyks6DQYygmQSCMQFMpdiRI18f3SPYA86KXfaPhECrifJZV1Sg61yBz' +
+              'aPGIzml92xpSCiSjhzlrhdxjQ9n5OQdnSo21nIYBNZnhQOMJnPKWP5SYGGm/7dsy' +
+              'eyQOlLC7ir+Cphgk9cw8DzWTXfD+6C7skyoOrEi5mh1gfPt+kP9mjm3gnDX6hvq+' +
+              'gyx6LAJMSuWVKFU/Jhd4piCAilU8SQ/7lpWSe2CgjQPfHXECmMTaRukSVR9mYIVd' +
+              'p/NEOSZL+qaU7hDIGCrN0IBRJNzGdNk40r2IpHSrYu0P0G7QaiN8WvZTHpDhxQGc' +
+              'y67AMyJrZ/7mbn7P0Yd/rW3LrxFWStcjimqTl+fNZBCoUfSAohtJctYdi9MkEhdi' +
+              'hdGnCC8FXTfPzXH44pwqTZP9AwxYBlIVRli3bH4yqd9aHcYFruGWpI9cwrKwt6xo' +
+              'GlTe5p7TgULFmQAvNIp+1Ca4PQukuEOOZlaIFPXOHMvd98YKnkAq6Qor39xKD4Ug' +
+              '5E5TkeMpETkPBVaC6T1Z8h43kOkdHOdjqNMvvtCbWYBk8akAge7XO35dGncs9CeE' +
+              '4QW28Uy/n5wC/pE2nUBOpJT1dCTiqq+XzH4f4Pi75HJalQpJIAAAAASUVORK5CYI' +
+              'I=')
+          ScrollBars = ssBoth
+          TabOrder = 0
+          WantReturns = False
+          WordWrap = False
+        end
+        object btnDetectImageBase64Decode: TButton
+          AlignWithMargins = True
+          Left = 50
+          Top = 197
+          Width = 353
+          Height = 35
+          Margins.Left = 50
+          Margins.Top = 10
+          Margins.Right = 50
+          Margins.Bottom = 10
+          Align = alTop
+          Caption = 'Base64 >> Image'
+          TabOrder = 1
+          OnClick = btnDetectImageBase64DecodeClick
+        end
+      end
+    end
   end
   object ApplicationEvents: TApplicationEvents
     OnException = ApplicationEventsException
@@ -1342,6 +1667,22 @@ object frmBase64LibApp: TfrmBase64LibApp
     Filter = 'Files (*.*)|*.*'
     Title = 'Save file'
     Left = 84
+    Top = 104
+  end
+  object OpenPictureDialog: TOpenPictureDialog
+    Filter = 
+      'All (*.wbmp;*.webp;*.svg;*.png_old;*.gif;*.png;*.jpg;*.jpeg;*.bm' +
+      'p;*.ico;*.emf;*.wmf;*.tif;*.tiff)|*.wbmp;*.webp;*.svg;*.png_old;' +
+      '*.gif;*.png;*.jpg;*.jpeg;*.bmp;*.ico;*.emf;*.wmf;*.tif;*.tiff|WB' +
+      'MP Images (*.wbmp)|*.wbmp|WebP Images (*.webp)|*.webp|Scalable V' +
+      'ector Graphics (*.svg)|*.svg|Portable Network Graphics (*.png_ol' +
+      'd)|*.png_old|GIF Image (*.gif)|*.gif|Portable Network Graphics (' +
+      '*.png)|*.png|JPEG Image File (*.jpg)|*.jpg|JPEG Image File (*.jp' +
+      'eg)|*.jpeg|Bitmaps (*.bmp)|*.bmp|Icons (*.ico)|*.ico|Enhanced Me' +
+      'tafiles (*.emf)|*.emf|Metafiles (*.wmf)|*.wmf|TIFF Images (*.tif' +
+      ')|*.tif|TIFF Images (*.tiff)|*.tiff|*.*|*.*'
+    Title = 'Select image'
+    Left = 148
     Top = 104
   end
 end

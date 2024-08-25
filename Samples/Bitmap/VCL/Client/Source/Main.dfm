@@ -133,7 +133,7 @@ object frmMain: TfrmMain
       TextHint = 'ID Bitmap'
     end
     object btnGetBitmap: TButton
-      Left = 510
+      Left = 503
       Top = 14
       Width = 100
       Height = 25

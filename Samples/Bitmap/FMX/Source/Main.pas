@@ -54,6 +54,8 @@ type
     FDQueryBASE64: TBlobField;
     FDQueryMESSAGE: TStringField;
     Lang: TLang;
+    lblFileBitmapToBase64Type: TLabel;
+    lblFileBitmapToBase64ConvertType: TLabel;
     procedure btnBitmapToBase64Click(Sender: TObject);
     procedure btnFileBitmapToBase64Click(Sender: TObject);
     procedure btnFileBitmapToBase64ConvertClick(Sender: TObject);
@@ -83,7 +85,7 @@ var
 implementation
 
 uses
-  FMX.MultiResBitmap, FMX.Platform, Base64Lib;
+  FMX.MultiResBitmap, FMX.Platform, Base64Lib, Base64Lib.Utils;
 
 {$R *.fmx}
 
@@ -198,11 +200,13 @@ procedure TfrmMain.btnBitmapToBase64Click(Sender: TObject);
 var
   lBase64: string;
 begin
+//  imgBitmapToBase64.MultiResBitmap.
+
   // ENCODE BITMAP
   lBase64 := TBase64Lib
     .Build
       .Encode
-        .Bitmap(imgBitmapToBase64.Bitmap).AsString;
+        .Image(imgBitmapToBase64.Bitmap).AsString;
 
   mmoBitmapToBase64.Lines.Clear;
   mmoBitmapToBase64.Lines.Add(lBase64);
@@ -350,6 +354,8 @@ begin
     imgFileBitmapToBase64.MultiResBitmap.Clear;
     lItem := imgFileBitmapToBase64.MultiResBitmap.ItemByScale(1, False, True);
     lItem.Bitmap.LoadFromStream(lBitmapStream);
+
+    lblFileBitmapToBase64Type.Text := TUtilsImage.DetectImage(lBitmapStream).AsText;
   finally
     lBitmapStream.Free;
   end;
@@ -364,6 +370,7 @@ begin
   mmoFileBitmapToBase64.Lines.Add(lBase64);
 
   crcFileBitmapToBase64Convert.Fill.Bitmap.Bitmap := nil;
+  lblFileBitmapToBase64ConvertType.Text := EmptyStr;
 
   // CHECK ENCODE/DECODE
   // https://base64.guru/converter/decode/image
@@ -388,6 +395,7 @@ begin
           .Text(lBase64).AsBitmap;
 
     crcFileBitmapToBase64Convert.Fill.Bitmap.Bitmap := lBitmap;
+    lblFileBitmapToBase64ConvertType.Text := TUtilsImage.DetectImage(lBitmap).AsText;
   finally
     lBitmap.Free;
   end;

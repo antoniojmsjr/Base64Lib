@@ -237,7 +237,6 @@ object frmMain: TfrmMain
     ResourceOptions.SilentMode = True
     UpdateOptions.AssignedValues = [uvCheckRequired]
     UpdateOptions.CheckRequired = False
-    AutoCommitUpdates = False
     Left = 128
     Top = 41
     object mtRequestID: TIntegerField

@@ -102,7 +102,7 @@ procedure TfrmMain.btnGetBitmapClick(Sender: TObject);
 var
   lHTTPResponse: IHTTPResponse;
   lURL: string;
-  lBitmap: TBitmap;
+  lPicture: TPicture;
 begin
   lURL := GetURL(edtServerHost.Text, StrToIntDef(edtServerPort.Text, 9000));
   lURL := lURL + '/base64/' + edtRequestBitmapID.Text;
@@ -116,18 +116,18 @@ begin
   if not Assigned(lHTTPResponse.ContentStream) then
     raise Exception.Create('Content response empty.');
 
-  lBitmap := nil;
+  lPicture := nil;
   try
     // DECODE
-    lBitmap := TBase64Lib
+    lPicture := TBase64Lib
       .Build
         .Decode
-          .Stream(lHTTPResponse.ContentStream).AsBitmap;
+          .Stream(lHTTPResponse.ContentStream).AsPicture;
 
     imgRequestBitmap.Picture.Assign(nil);
-    imgRequestBitmap.Picture.Assign(lBitmap);
+    imgRequestBitmap.Picture.Assign(lPicture);
   finally
-    lBitmap.Free;
+    lPicture.Free;
   end;
 end;
 

@@ -6,7 +6,8 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Imaging.pngimage,
-  Vcl.ComCtrls, Vcl.StdCtrls, Vcl.AppEvnts;
+  Vcl.ComCtrls, Vcl.StdCtrls, Vcl.AppEvnts, Vcl.ExtDlgs, Vcl.Imaging.jpeg,
+  Vcl.Imaging.GIFImg;
 
 type
   TfrmBase64LibApp = class(TForm)
@@ -79,6 +80,25 @@ type
     lblFileBase64OutputFile: TLabel;
     SaveDialog: TSaveDialog;
     Label1: TLabel;
+    tbsDetectImage: TTabSheet;
+    pnlDetectImage: TPanel;
+    pnlDetectImageHeader: TPanel;
+    pnlDetectImageClient: TPanel;
+    Label2: TLabel;
+    lblDetectImageType: TLabel;
+    bvlDetectImageHeader: TBevel;
+    btnDetectImageLoadFile: TButton;
+    imgDetectImage: TImage;
+    OpenPictureDialog: TOpenPictureDialog;
+    pnlDetectImageBase64: TPanel;
+    lblDetectImageBase64Input: TLabel;
+    lblDetectImageBase64Output: TLabel;
+    imgDetectImageBase64Output: TImage;
+    mmoDetectImageBase64Input: TMemo;
+    btnDetectImageBase64Decode: TButton;
+    lblDetectImageBase64OutputType: TLabel;
+    lblBitmapBase64InputBitmapType: TLabel;
+    lblBitmapBase64OutputBitmapType: TLabel;
     procedure lblHeaderAppGithubLinkClick(Sender: TObject; const Link: string;
       LinkType: TSysLinkType);
     procedure FormCreate(Sender: TObject);
@@ -93,6 +113,8 @@ type
     procedure btnFileBase64InputFileClick(Sender: TObject);
     procedure btnFileBase64EncodeClick(Sender: TObject);
     procedure btnFileBase64DecodeClick(Sender: TObject);
+    procedure btnDetectImageLoadFileClick(Sender: TObject);
+    procedure btnDetectImageBase64DecodeClick(Sender: TObject);
   private
     { Private declarations }
     procedure GetStatus;
@@ -127,7 +149,6 @@ end;
 procedure TfrmBase64LibApp.GetStatus;
 var
   lText: string;
-  lBitmap: TBitmap;
 begin
   lText := mmoTextBase64InputText.Text;
   Delete(lText, (Length(lText)+1) - (Length(sLineBreak)), (Length(sLineBreak)));
@@ -136,9 +157,9 @@ begin
   mmoTextBase64InputText.Clear;
   mmoTextBase64InputText.Text := lText;
 
-  lBitmap := TBitmap(imgBitmapBase64InputBitmap.Picture.Graphic);
-  stbBitmapBase64InputBitmap.Panels[1].Text := TUtilsString.GetMD5FromBitmap(lBitmap);
-  stbBitmapBase64InputBitmap.Panels[3].Text := TUtilsString.GetSizeFromBitmap(lBitmap).ToString;
+  stbBitmapBase64InputBitmap.Panels[1].Text := TUtilsString.GetMD5FromImage(imgBitmapBase64InputBitmap.Picture);
+  stbBitmapBase64InputBitmap.Panels[3].Text := TUtilsString.GetSizeFromImage(imgBitmapBase64InputBitmap.Picture).ToString;
+  lblBitmapBase64InputBitmapType.Caption := TUtilsImage.DetectImage(imgBitmapBase64InputBitmap.Picture).AsText;
 end;
 
 procedure TfrmBase64LibApp.ApplicationEventsException(Sender: TObject; E: Exception);
@@ -154,32 +175,36 @@ end;
 procedure TfrmBase64LibApp.btnBitmapBase64DecodeClick(Sender: TObject);
 var
   lDecode: IDecodeParse;
-  lBitmap: TBitmap;
+  lPicture: TPicture;
 begin
-  lDecode := TBase64Lib.Build.Decode.Text(mmoBitmapBase64InputBase64.Text);
+  lDecode := TBase64Lib
+               .Build
+                 .Decode
+                   .Text(mmoBitmapBase64InputBase64.Text);
 
   if not Assigned(lDecode) then
     Exit;
 
-  lBitmap := lDecode.AsBitmap;
+  lPicture := lDecode.AsPicture;
   try
     imgBitmapBase64OutputBitmap.Picture.Assign(nil);
-    imgBitmapBase64OutputBitmap.Picture.Assign(lBitmap);
+    imgBitmapBase64OutputBitmap.Picture.Assign(lPicture);
     stbBitmapBase64OutputBitmap.Panels[1].Text := lDecode.MD5;
     stbBitmapBase64OutputBitmap.Panels[3].Text := lDecode.Size.ToString;
+    lblBitmapBase64OutputBitmapType.Caption := TUtilsImage.DetectImage(lPicture).AsText;
   finally
-    lBitmap.Free;
+    lPicture.Free;
   end;
 end;
 
 procedure TfrmBase64LibApp.btnBitmapBase64EncodeClick(Sender: TObject);
 var
   lEncode: IEncodeParse;
-  lBitmap: TBitmap;
 begin
-  lBitmap := TBitmap(imgBitmapBase64InputBitmap.Picture.Graphic);
-
-  lEncode := TBase64Lib.Build.Encode.Bitmap(lBitmap);
+  lEncode := TBase64Lib
+               .Build
+                 .Encode
+                   .Image(imgBitmapBase64InputBitmap.Picture);
 
   if not Assigned(lEncode) then
     Exit;
@@ -193,6 +218,51 @@ begin
   mmoBitmapBase64InputBase64.Text := lEncode.AsString;
   stbBitmapBase64InputBase64.Panels[1].Text := TUtilsString.GetMD5FromText(lEncode.AsString);
   stbBitmapBase64InputBase64.Panels[3].Text := TUtilsString.GetSizeFromText(lEncode.AsString).ToString;
+end;
+
+procedure TfrmBase64LibApp.btnDetectImageBase64DecodeClick(Sender: TObject);
+var
+  lDecode: IDecodeParse;
+  lPicture: TPicture;
+begin
+  lDecode := TBase64Lib
+               .Build
+                 .Decode
+                   .Text(mmoDetectImageBase64Input.Text);
+
+  if not Assigned(lDecode) then
+    Exit;
+
+  lPicture := lDecode.AsPicture;
+  lblDetectImageBase64OutputType.Caption := TUtilsImage.DetectImage(lPicture).AsText;
+  try
+    imgDetectImageBase64Output.Picture.Assign(nil);
+    imgDetectImageBase64Output.Picture.Assign(lPicture);
+  finally
+    lPicture.Free;
+  end;
+end;
+
+procedure TfrmBase64LibApp.btnDetectImageLoadFileClick(Sender: TObject);
+var
+  lFileStream: TBytesStream;
+  lTypeImage: TTypeImage;
+begin
+  if not OpenPictureDialog.Execute then
+    Exit;
+
+  lFileStream := TBytesStream.Create;
+  try
+    lFileStream.LoadFromFile(OpenPictureDialog.FileName);
+
+    lTypeImage := TUtilsImage.DetectImage(lFileStream);
+    lblDetectImageType.Caption := lTypeImage.AsText;
+  finally
+    lFileStream.Free;
+  end;
+
+  imgDetectImage.Picture.Assign(nil);
+  imgDetectImage.Picture.LoadFromFile(OpenPictureDialog.FileName);
 end;
 
 procedure TfrmBase64LibApp.btnFileBase64DecodeClick(Sender: TObject);

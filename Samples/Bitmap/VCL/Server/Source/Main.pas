@@ -149,7 +149,7 @@ procedure TfrmMain.dbgRequestDblClick(Sender: TObject);
 var
   lBase64: string;
   lID: Integer;
-  lBitmap: TBitmap;
+  lPicture: TPicture;
 begin
   lID := mtRequest.FieldByName('ID').AsInteger;
   lBase64 := mtRequest.FieldByName('BASE64').AsString;
@@ -163,18 +163,18 @@ begin
   lblViewBitmapBrowser.Visible := True;
 
   //VIEW IMAGE
-  lBitmap := nil;
+  lPicture := nil;
   try
     // DECODE
-    lBitmap := TBase64Lib
+    lPicture := TBase64Lib
       .Build
         .Decode
-          .Text(lBase64).AsBitmap;
+          .Text(lBase64).AsPicture;
 
     imgBitmap.Picture.Assign(nil);
-    imgBitmap.Picture.Assign(lBitmap);
+    imgBitmap.Picture.Assign(lPicture);
   finally
-    lBitmap.Free;
+    lPicture.Free;
   end;
 
   // VIEW BASE64
@@ -347,7 +347,7 @@ begin
   TBlobField(mtRequest.FieldByName('BASE64')).LoadFromStream(pBase64);
 
   mtRequest.FieldByName('TYPE_BITMAP').AsString :=
-    TUtilsBitmap.DetectBitmap(mtRequest.FieldByName('BASE64').AsString).AsString;
+    TUtilsImage.DetectImage(mtRequest.FieldByName('BASE64').AsString).AsString;
 
   mtRequest.Post;
 
