@@ -97,12 +97,12 @@ begin
   lEncode := TBase64Lib
     .Build
       .Encode
-        .Bitmap(Timage.Picture); // VCL
+        .Image(Timage.Picture); // VCL
 
   lEncode := TBase64Lib
     .Build
       .Encode
-        .Bitmap(Timage.Bitmap); // FMX
+        .Image(Timage.Bitmap); // FMX
 
   lBase64 := lEncode.AsString;
   lBase64Size := lEncode.Size;
