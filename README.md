@@ -107,6 +107,7 @@ begin
   lBase64 := lEncode.AsString;
   lBase64Size := lEncode.Size;
   lBase64MD5 := lEncode.MD5;
+end;
 ```
 
 ### [Decodificação](https://github.com/antoniojmsjr/Base64Lib/wiki/Decodifica%C3%A7%C3%A3o)
