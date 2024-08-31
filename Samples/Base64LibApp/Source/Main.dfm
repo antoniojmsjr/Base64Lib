@@ -329,7 +329,7 @@ object frmBase64LibApp: TfrmBase64LibApp
     Top = 159
     Width = 814
     Height = 501
-    ActivePage = tbsBitmapBase64
+    ActivePage = tbsDetectImage
     Align = alClient
     Style = tsFlatButtons
     TabHeight = 25
@@ -1420,18 +1420,44 @@ object frmBase64LibApp: TfrmBase64LibApp
           Caption = 'pnlDetectImageClient'
           ShowCaption = False
           TabOrder = 1
+          ExplicitLeft = -3
+          ExplicitTop = 65
           object imgDetectImage: TImage
             AlignWithMargins = True
             Left = 3
             Top = 3
             Width = 347
-            Height = 396
+            Height = 371
             Align = alClient
             Center = True
-            ExplicitLeft = 0
-            ExplicitTop = 1
+            ExplicitLeft = -3
+            ExplicitTop = -175
             ExplicitWidth = 353
             ExplicitHeight = 402
+          end
+          object stbDetectImage: TStatusBar
+            AlignWithMargins = True
+            Left = 3
+            Top = 380
+            Width = 347
+            Height = 19
+            Panels = <
+              item
+                Text = 'MD5:'
+                Width = 40
+              end
+              item
+                Width = 230
+              end
+              item
+                Text = 'SIZE:'
+                Width = 40
+              end
+              item
+                Width = 50
+              end>
+            ExplicitLeft = 6
+            ExplicitTop = 11
           end
         end
       end

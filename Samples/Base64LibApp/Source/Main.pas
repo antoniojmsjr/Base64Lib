@@ -99,6 +99,7 @@ type
     lblDetectImageBase64OutputType: TLabel;
     lblBitmapBase64InputBitmapType: TLabel;
     lblBitmapBase64OutputBitmapType: TLabel;
+    stbDetectImage: TStatusBar;
     procedure lblHeaderAppGithubLinkClick(Sender: TObject; const Link: string;
       LinkType: TSysLinkType);
     procedure FormCreate(Sender: TObject);
@@ -263,6 +264,9 @@ begin
 
   imgDetectImage.Picture.Assign(nil);
   imgDetectImage.Picture.LoadFromFile(OpenPictureDialog.FileName);
+
+  stbDetectImage.Panels[1].Text := TUtilsString.GetMD5FromFile(OpenPictureDialog.FileName);
+  stbDetectImage.Panels[3].Text := TUtilsString.GetSizeFromFile(OpenPictureDialog.FileName).ToString;
 end;
 
 procedure TfrmBase64LibApp.btnFileBase64DecodeClick(Sender: TObject);
