@@ -243,7 +243,7 @@ https://github.com/user-attachments/assets/222719ca-8b65-4297-b3b4-c654ca0b2114
 ```
 https://github.com/user-attachments/assets/2a2b3cd5-5720-456e-a900-5b8c1117dc06
 
-## Licença
+## ⚠️ Licença
 `Base64Lib` is free and open-source software licensed under the [![License](https://img.shields.io/badge/license-MIT%202-blue.svg)](https://github.com/antoniojmsjr/Base64Lib/blob/master/LICENSE)
 
 [:arrow_up: Ir para o Topo](https://github.com/antoniojmsjr/Base64Lib/tree/main#base64lib)
