@@ -220,7 +220,7 @@ begin
 end;
 ```
 
-#### Exemplo compilado
+## ▶️ Exemplo compilado
 
 * [Base64LibApp](https://github.com/user-attachments/files/16741894/Base64LibApp.zip)
 * [FMX](https://github.com/user-attachments/files/16621577/FMX.zip)
