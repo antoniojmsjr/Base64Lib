@@ -27,7 +27,7 @@ Para mais informações, consultar **[Wiki](https://github.com/antoniojmsjr/Base
 #### Recursos
 
 * Facilidade de Integração: Com uma interface amigável e documentação detalhada, a Base64Lib é fácil de integrar em qualquer projeto.
-* Flexibilidade: Base64Lib suporta diferentes tipos de dados, desde `string` até tipos complexos(`TBitmap`, `TPicture`, `TStream`, `TBytes` e etc.), permitindo uma ampla gama de aplicações, desde comunicação entre sistemas até armazenamento.
+* Flexibilidade: Base64Lib suporta diferentes tipos de dados, abrangendo desde `strings` até tipos complexos(`TBitmap`, `TPicture`, `TStream`, `TBytes` e etc.), permitindo uma ampla gama de aplicações, desde comunicação entre sistemas até armazenamento.
 * Exemplos de uso: Repositório com diversos exemplos de uso da biblioteca, por exemplo, VCL, FMX e um servidor de aplicação em [Horse](https://github.com/HashLoad/horse).
 </br>
 
